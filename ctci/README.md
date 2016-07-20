@@ -1,6 +1,5 @@
 
 Cracking the Coding Interview: 150 Programming Questions and Solutions 5th Revised & enlarged Edition
-
 ISBN-13: 978-0984782802
 ISBN-10: 098478280X
 
