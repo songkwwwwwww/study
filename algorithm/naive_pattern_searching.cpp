@@ -17,6 +17,10 @@ http://www.geeksforgeeks.org/searching-for-patterns-set-1-naive-pattern-searchin
 	@param	pat	the pattern
 
 	@return	vector of index
+	
+	
+	if N = length of text, M =  length of pattern
+	theh, time complexity    :    O( N * M)
 */
 std::vector<int> naive_search(const std::string& txt, const std::string& pat){
 	std::vector<int> result;
