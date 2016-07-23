@@ -1,5 +1,5 @@
 # 알고리즘 문제 해결 전략 세트 프로그래밍 대회에서 배우는
-or JMB, (is a abbreviation for Jong-Man-Book)
+or JMB, (is the abbreviation for Jong-Man-Book)
 
 ISBN 9788966260546
 
