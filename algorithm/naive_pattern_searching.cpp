@@ -16,7 +16,7 @@ http://www.geeksforgeeks.org/searching-for-patterns-set-1-naive-pattern-searchin
 	@param	txt	the text
 	@param	pat	the pattern
 
-	@return	vector of index
+	@return	vector of starting index
 	
 	
 	if N = length of text, M =  length of pattern
