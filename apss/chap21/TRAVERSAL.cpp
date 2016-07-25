@@ -1,4 +1,6 @@
 /*
+https://en.wikipedia.org/wiki/Binary_tree
+
 	#binary tree representation
 
 	    S
