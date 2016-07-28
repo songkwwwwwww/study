@@ -18,7 +18,7 @@ int main() {
 	using std::cout;
 	using std::endl;
 
-	if (freopen("input.txt", "r", stdin) == NULL)
+	if (freopen("1003.txt", "r", stdin) == NULL)
 		cout << "fileopen failed" << endl;
 
 	int TC;
