@@ -38,7 +38,7 @@ ISBN 9788966260546
 + 팬 미팅	FANMEETING
 
 8장 동적 계획법 
-+ 외발뛰기	JUMPGAME
++ ~~외발뛰기	JUMPGAME~~
 + 와일드카드	WILDCARD
 + 삼각형 위의 최대 경로	TRIANGLEPATH
 + 최대 부분 증가 수열	LIS
