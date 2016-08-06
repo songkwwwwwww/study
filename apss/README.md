@@ -10,7 +10,7 @@ ISBN 9788966260546
 	1부 문제 해결 시작하기 
 
 1장 문제 해결과 프로그래밍 대회
-	+ 록 페스티벌	FESTIVAL
++ 록 페스티벌	FESTIVAL
 
 2장 문제 해결 개관 
 
@@ -27,12 +27,44 @@ ISBN 9788966260546
 	3부 알고리즘 설계 패러다임 
 
 6장 무식하게 풀기 
++ 보글 게임	BOGGLE
++ 소풍	PICNIC
++ 게임판 덮기	BOARDCOVER
++ 시계 맞추기	CLOCKSYNC
 
 7장 분할 정복 
++ 쿼드 트리 뒤집기	QUADTREE
++ 울타리 잘라내기	FENCE
++ 팬 미팅	FANMEETING
 
 8장 동적 계획법 
++ 외발뛰기	JUMPGAME
++ 와일드카드	WILDCARD
++ 삼각형 위의 최대 경로	TRIANGLEPATH
++ 최대 부분 증가 수열	LIS
++ 합친 LIS	JLIS
++ 원주율 외우기	PI
++ Quantization	QUANTIZE
++ 타일링 방법의 수 세기	TILING2
++ 삼각형 위의 최대 경로 수 세기	TRIPATHCNT
++ 달팽이	SNAIL
++ 비대칭 타일링	ASYMTILING
++ 폴리오미노	POLY
++ 두니발 박사의 탈옥	NUMB3RS
 
 9장 동적 계획법 테크닉 
++ 여행 짐 싸기	PACKING
++ 광학 문자 인식	OCR
++ 모스 부호 사전	MORSE
++ k번째 최대 증가 부분 수열	KLIS
++ 드래곤 커브	DRAGON
++ 웨브바짐	ZIMBABWE
++ 실험 데이터 복구하기	RESTORE
++ 틱택토	TICTACTOE
++ 숫자 게임	NUMBERGAME
++ 블록 게임	BLOCKGAME
++ 회전초밥	SUSHI
++ 지니어스	GENIUS
 
 10장 탐욕법 
 
