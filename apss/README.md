@@ -4,6 +4,7 @@ known as JMB, (is the abbreviation for Jong-Man-Book)
 
 ISBN 9788966260546
 
+<http://book.algospot.com/index.html>
 
 ==== 1권 ====
 
