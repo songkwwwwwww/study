@@ -1,1 +1,2 @@
-#acm_icpc
+acm_icpc
+=
