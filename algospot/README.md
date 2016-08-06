@@ -1,2 +1,3 @@
-#algospot
+algospot
+=
 https://www.algospot.com/
