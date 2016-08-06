@@ -26,6 +26,9 @@ Dynamic Programming
 9461 Padovan Sequence
 <https://www.acmicpc.net/problem/9461>
 
+9465 Stickers
+<https://www.acmicpc.net/problem/9465>
+
 9507 Generations of Tribbles
 <https://www.acmicpc.net/problem/9507>
 
