@@ -36,3 +36,7 @@ Dynamic Programming
 
 4781 Candy Store
 <https://www.acmicpc.net/problem/4781>
+
+5721 Candy Distribution
+<https://www.acmicpc.net/problem/5721>
+
