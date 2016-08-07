@@ -43,7 +43,7 @@ ISBN 9788966260546
 + 와일드카드	WILDCARD
 + 삼각형 위의 최대 경로	TRIANGLEPATH
 + 최대 부분 증가 수열	LIS
-+ 합친 LIS	JLIS
++ ~~합친 LIS	JLIS~~<https://algospot.com/judge/problem/read/JLIS>
 + 원주율 외우기	PI
 + Quantization	QUANTIZE
 + 타일링 방법의 수 세기	TILING2
