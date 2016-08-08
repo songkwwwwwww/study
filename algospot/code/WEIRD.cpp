@@ -74,13 +74,13 @@ bool is_weird(int n){
 */
 bool sum_recur(const std::vector<int>& v, int index, int sum, int target_sum){
 
-	// base condition 1
+	// base case 1
 	if(index > v.size()) return false;
 
-	// base condition 2
+	// base case 2
 	if(sum > target_sum) return false;
 
-	// base condition 3
+	// base case 3
 	if(sum == target_sum) return true;
 
 	int next_index = index + 1;

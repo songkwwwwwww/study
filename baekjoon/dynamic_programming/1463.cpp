@@ -43,7 +43,7 @@ int cache[1000001];
 */
 int calc(int n) {
 
-	// basis condition
+	// base case
 	if (n == 1)	return 0;
 
 

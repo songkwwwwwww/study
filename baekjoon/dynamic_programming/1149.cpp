@@ -30,7 +30,7 @@ int min(int x, int y) {
 */
 int select(int current_index, int color) {
 	
-	// basis condition
+	// base case
 	if (current_index == num_of_houses) return 0;
 	
 	int& ret = cache[current_index][color];
