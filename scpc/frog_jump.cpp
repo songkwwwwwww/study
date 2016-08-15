@@ -1,3 +1,10 @@
+/*
+	boj problem #
+
+11060
+
+*/
+
 #include <cstdio>
 
 int N; // 1 <= N <= 1,000,000
