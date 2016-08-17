@@ -1,3 +1,3 @@
 CODEFORCES
 =
-<http://www.codeforces.com/blog/entry/46148>
+<http://www.codeforces.com/>
