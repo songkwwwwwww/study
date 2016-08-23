@@ -1,4 +1,4 @@
-Binary Search
+Divide & Conquer
 =
 
 ### unsolved
