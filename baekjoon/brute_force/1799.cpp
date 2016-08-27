@@ -39,21 +39,19 @@ bool check(int r, int c){
 int sol = 0;
 // 놓을 수 있는 비숍의 최대 개수를 반환한다.
 void go(vector<int>& candidates, int index, int n_bishops){
-    if(n_bishops > sol) sol = n_bishops;
+    
     for(int i = index; i < candidates.size(); i++){
         int x = candidates[i] / N;
         int y = candidates[i] % N;
         if(check(x, y)){
-            board[x][y] == true;
             checked_dia[x + y] = true;
             checked_dia2[(N - 1) + x - y] = true;
             go(candidates, index + 1, n_bishops + 1);
+            if(n_bishops + 1 > sol) sol = n_bishops + 1;
             checked_dia[x + y] = false;
             checked_dia2[(N - 1) + x - y] = false;
-            board[x][y] == false;
         }
     }
-    //return ans;
 }
 
 int main(){
@@ -70,13 +68,6 @@ int main(){
                 candidates.push_back(i * N + j);
         }
     }
-    /*
-    for(int i = 0; i < candidates.size(); i++){
-        int x = candidates[i] / N;
-        int y = candidates[i] % N;
-        printf("%d %d\n", x, y);
-    }*/
     go(candidates, 0, 0);
-    //printf("%d\n", go(candidates, 0, 0));
     printf("%d\n", sol);
 }
