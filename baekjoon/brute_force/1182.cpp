@@ -49,8 +49,6 @@ int main(){
     vector<int> v(N);
     for(int i = 0; i < N; i++) scanf("%d", &v[i]);
 
-    for(int i = 0; i < N; i++) printf("%d ", v[i]);
-    printf("\n");
     int ans = go(v, 0, 0);
     if(S == 0) ans--;
     cout << ans << endl;
