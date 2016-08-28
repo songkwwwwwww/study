@@ -20,19 +20,18 @@ using namespace std;
 
 typedef long long ll;
 
-int h[100000]; // heights
-int n; // 1<= n <= 100000
+ll h[100000]; // heights ( 0 <= h_i <= 10,0000,0000)
+int n; // 1<= n <= 10,0000
 
-
-int solve(int left, int right){
+ll solve(int left, int right){
     // base case
     if(left == right) return h[left];
 
     int mid = (left + right) / 2;
-    int ret = MAX(solve(left, mid), solve(mid + 1, right));
+    ll ret = MAX(solve(left, mid), solve(mid + 1, right));
 
     int lo = mid, hi = mid + 1;
-    int height = MIN(h[lo], h[hi]);
+    ll height = MIN(h[lo], h[hi]);
     ret = MAX(ret, height * 2);
 
     while(left < lo || hi < right){
@@ -47,7 +46,6 @@ int solve(int left, int right){
         ret = MAX(ret, height * (hi - lo + 1));
     }
     return ret;
-
 }
 
 int main(){
@@ -55,8 +53,8 @@ int main(){
     while(true){
         scanf("%d", &n);
         if(n == 0) break;
-        for(int i = 0; i < n; i++) scanf("%d", &h[i]);
-        printf("%d\n", solve(0, n - 1));
+        for(int i = 0; i < n; i++) scanf("%lld", &h[i]);
+        printf("%lld\n", solve(0, n - 1));
     }
     return 0;
 }
