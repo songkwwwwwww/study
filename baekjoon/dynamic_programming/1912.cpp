@@ -20,10 +20,17 @@ using namespace std;
 
 typedef long long ll;
 
-/*
+int a[100001];
 
-*/
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("1912.txt", "r", stdin);
+    int n, max, dp; // 1 <= n <= 10,0000
+    scanf("%d", &n);
+    for(int i = 1; i <= n; i++) scanf("%d", &a[i]);
+    max = dp = a[1];
+    for(int i = 2; i <= n; i++){
+        dp = MAX(dp + a[i], a[i]);
+        if(max < dp) max = dp;
+    }
+    printf("%d\n", max);
 }
