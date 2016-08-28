@@ -92,9 +92,7 @@ bool sum_recur(const std::vector<int>& v, int index, int sum, int target_sum){
 int main(){
 	int TC, n, result;
 
-	if(freopen("WEIRD.txt", "r", stdin) == NULL ){
-		printf("file open failed");
-	}
+	freopen("WEIRD.txt", "r", stdin);
 	setbuf(stdout, NULL);	
 
 	scanf("%d", &TC);
@@ -102,10 +100,8 @@ int main(){
 
 	for(int i = 0; i < TC; i++){
 		scanf("%d", &n);
-		if(n <= 500000 || n > 1){
-			result = is_weird(n);
-			if(result) printf("weird\n");
-			else printf("not weird\n");
-		}
+		result = is_weird(n);
+		if(result) printf("weird\n");
+		else printf("not weird\n");
 	}
 }
