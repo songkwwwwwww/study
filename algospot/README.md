@@ -1,3 +1,2 @@
-algospot
+Problems And Codes
 =
-https://www.algospot.com/

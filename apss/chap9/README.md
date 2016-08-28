@@ -2,4 +2,12 @@
 =
 
 ### unsolved
-RESTORE
+
+
+9.12 ZIMBABWE
+
+9.14 RESTORE
+
+9.23 SUSHI
+
+9.24 GENIUS
