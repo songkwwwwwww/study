@@ -4,6 +4,11 @@
 
 #include <cstdio>
 
+/*
+ 처리과정
+ dp[n][l] : 길이가 n이 총 계단수 [계단길이][해당숫자]
+ dp[n][l] = dp[n-1][l-1] + dp[n-1][l+1]
+*/
 #define MOD 1000000000
 int N; // 1 <= N <= 100
 

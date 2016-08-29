@@ -1,81 +1,57 @@
 #include <iostream>
+#include <vector>
+#include <algorithm> // std::max, std::min, std::sort, std::swap
+#include <string> // std::string, std::stoi
+#include <queue> // std::queue
+#include <deque> // std::deque
+#include <list> // std::list
+
+#include <map>
+#include <utility> // std::pair
+
 #include <cstdio>
-#include <cstring>
+#include <cstring> // memset
+#include <cmath> // std::abs
+
+using namespace std;
+
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MIN(x, y) ((x) < (y) ? (x) : (y))
+
+typedef long long ll;
 
 /*
-
-1·Î ¸¸µé±â
-( https://www.acmicpc.net/problem/1463 )
-
-@problem
-Á¤¼ö X¿¡ »ç¿ëÇÒ ¼ö ÀÖ´Â ¿¬»êÀº ´ÙÀ½°ú °°ÀÌ ¼¼ °¡Áö ÀÌ´Ù.
-
-X°¡ 3À¸·Î ³ª´©¾î ¶³¾îÁö¸é, 3À¸·Î ³ª´«´Ù.
-X°¡ 2·Î ³ª´©¾î ¶³¾îÁö¸é, 2·Î ³ª´«´Ù.
-1À» »«´Ù.
-Á¤¼ö NÀÌ ÁÖ¾îÁ³À» ¶§, À§¿Í °°Àº ¿¬»ê ¼¼ °³¸¦ ÀûÀýÈ÷ »ç¿ëÇØ¼­ 1À» ¸¸µå·Á°í ÇÑ´Ù. ¿¬»êÀ» »ç¿ëÇÏ´Â È½¼öÀÇ ÃÖ¼Ò°ªÀ» Ãâ·ÂÇÏ½Ã¿À.
-
-ÀÔ·Â
-Ã¹Â° ÁÙ¿¡ 1º¸´Ù Å©°Å³ª °°°í, 10^6º¸´Ù ÀÛ°Å³ª °°Àº ÀÚ¿¬¼ö NÀÌ ÁÖ¾îÁø´Ù.
-
-Ãâ·Â
-Ã¹Â° ÁÙ¿¡ ¿¬»êÀ» ÇÏ´Â È½¼öÀÇ ÃÖ¼Ò°ªÀ» Ãâ·ÂÇÑ´Ù.
-
-@input
-10
-@output
-3
-
+ì²˜ë¦¬ê³¼ì •
+ Në²ˆì§¸ ìµœì†Œê°’ì´ ë˜ë ¤ë©´ N/3 , N/2 , N-1 ì˜ ê°’ ìµœì†Œê°’ì¤‘ì—ì„œ 1ì„ ë”í•˜ë©´ ëœë‹¤.
+ dp[n] = nì„ 1ë¡œ ë§Œë“œëŠ”ë° ìµœì†Œ ì—°ì‚° íšŸìˆ˜
 */
-
-#define INFINITE 987654321
-
-int min(int x, int y) {
-	return x < y ? x : y;
-}
-
-
+const int INFINITE = 0x7fffffff;
 
 int cache[1000001];
-/*
-	Memoization (Top Down):
-	assume that a cache array is initialized to -1
-*/
+// Memoization (Top Down):
+// assume that a cache array is initialized to -1
 int calc(int n) {
-
 	// base case
 	if (n == 1)	return 0;
-
 
 	int& ret = cache[n];
 	// is it cached?
 	if (ret != -1) return ret;
 
 	int result = INFINITE;
-
 	if ((n % 3) == 0 ) 
 		result = min(result, 1 + calc(n / 3));
-	
-
 	if ( (n % 2) == 0 ) 
 		result = min(result, 1 + calc(n / 2));
-	
 
 	ret = min(result, 1 + calc(n - 1));
 	return ret;
 }
-
-int main() {
-	using std::cout;
-	using std::endl;
-
-	if (freopen("1463.txt", "r", stdin) == NULL)
-		cout << "fileopen failed" << endl;
-	
+int main(){
+    freopen("1463.txt", "r", stdin);
 	int N;
 	scanf("%d", &N);// 1 <= N <= 1,000,000
 	memset(cache, -1, sizeof(cache));
 
 	printf("%d\n", calc(N));
-	return 0;
 }

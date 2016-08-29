@@ -5,7 +5,6 @@
 #include <queue> // std::queue
 #include <deque> // std::deque
 #include <list> // std::list
-#include <set>
 
 #include <map>
 #include <utility> // std::pair
@@ -25,6 +24,24 @@ typedef long long ll;
 
 */
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("10824.txt", "r", stdin);
+    int A, B, C, D;
+    scanf("%d %d %d %d", &A, &B, &C, &D);
+    ll AB, CD;
+    ll carry = 1;
+    int b = B;
+    while(b){
+        b /= 10;
+        carry *= 10;
+    }
+    AB = (ll)A * carry + B;
+    
+    carry = 1;
+    int d = D;
+    while(d){
+        d /= 10;
+        carry *= 10;
+    }
+    CD = (ll)C * carry + D;
+    printf("%lld\n", AB + CD);
 }

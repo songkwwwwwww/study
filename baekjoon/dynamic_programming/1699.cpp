@@ -36,15 +36,16 @@ typedef long long ll;
 출력
 주어진 자연수를 제곱수의 합으로 나타낼 때에 그 제곱수 항의 최소 개수를 출력한다.
 */
+/*
+ 처리과정
+ dp[n] : n을 제곱수의 합으로 표현한 최소 갯수
+ dp[n] = dp[n-i*i] +1 의 최소값(0 <= i <= n)
+*/
 int dp[100001];
 int main(){
     freopen("1699.txt", "r", stdin);
     int N; 
     scanf("%d", &N);
-    /*
-    dp[n] : n을 제곱수의 합으로 표현한 최소 갯수
-    dp[n] = dp[n-i*i] +1 의 최소값(0 <= i <= n)
-    */
     for(int i = 1; i <= N; i++){
         dp[i] = i;
         for(int j = 1; j * j <= i; j++){

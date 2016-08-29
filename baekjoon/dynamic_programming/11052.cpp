@@ -13,7 +13,15 @@ int p[1001];
 int d[1001];
 
 
-
+/*
+ 처리과정
+ dp[n] : n개 붕어빵을 파는 최대 수익
+ dp[n] =  dp[n-1]+arr[1]
+        , dp[n-2]+arr[2]
+        , dp[n-3]+arr[3] ...
+        , dp[n-n]+arr[n]
+        의 최대값
+*/
 int main(){
 	freopen("11052.txt", "r", stdin);
 	scanf("%d", &N);
