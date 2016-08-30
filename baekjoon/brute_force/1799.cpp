@@ -39,7 +39,6 @@ bool check(int r, int c){
 int sol = 0;
 // 놓을 수 있는 비숍의 최대 개수를 반환한다.
 void go(vector<int>& candidates, int index, int n_bishops){
-    
     for(int i = index; i < candidates.size(); i++){
         int x = candidates[i] / N;
         int y = candidates[i] % N;
@@ -52,7 +51,10 @@ void go(vector<int>& candidates, int index, int n_bishops){
             checked_dia2[(N - 1) + x - y] = false;
         }
     }
+
 }
+
+
 
 int main(){
     freopen("1799.txt", "r", stdin);

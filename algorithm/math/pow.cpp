@@ -1,8 +1,13 @@
 #include <iostream>
 
 /*
-	compute a^n
+참조:
+	Stanford Univ.
+	Course : Introduction to Programming Contests
+	Chap2 Mathematics
 
+
+	compute a^n
 	O(logn)
 */
 

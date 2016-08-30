@@ -1,4 +1,4 @@
-
+// 알고리즘 문제 해결 전략(종만북) 참조
 bool is_prime(int n){
 	if(n <= 1) return false;
 	if(n == 2) return true;

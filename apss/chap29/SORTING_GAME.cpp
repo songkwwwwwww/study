@@ -11,6 +11,7 @@ int N;
 
 map<vector<int>, int> to_sort;
 
+// [0, ... ,n - 1] 의 모든 순열에 대해 to_sort[]를 계산해 저장한다.
 void precalc(int n){
     vector<int> perm(n);
     for(int i = 0; i < n; i++) perm[i] = i;

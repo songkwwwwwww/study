@@ -6,9 +6,7 @@
 
 int h[20000]; // heights
 int n; // 1<= n <= 20000
-
-
-// range : [left, right]
+// [left, right] 구간에서 찾아낼 수 있는 가장 큰 사각형의 넓이를 반환한다.
 int solve(int left, int right){
     // base case
     if(left == right) return h[left];
