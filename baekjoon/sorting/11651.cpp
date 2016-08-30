@@ -25,7 +25,20 @@ typedef long long ll;
 /*
 
 */
-int main(){
-    freopen(".txt", "r", stdin);
 
+
+int main(){
+    freopen("11651.txt", "r", stdin);
+    int N; scanf("%d", &N);// 1 <= N <= 10,0000
+    vector<pair<int, int> > v;
+    v.reserve(N);
+    for(int i = 0; i < N; i++){
+        int a, b;
+        scanf("%d %d", &a, &b);
+        v.push_back(make_pair (b, a));
+    }
+    sort(v.begin(), v.end());
+    for(int i = 0; i < N; i++){
+        printf("%d %d\n", v[i].second, v[i].first);
+    }    
 }

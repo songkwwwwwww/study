@@ -25,7 +25,17 @@ typedef long long ll;
 /*
 
 */
+char str[51];
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("9012.txt", "r", stdin);
+    int TC; scanf("%d", &TC);
+    while(TC--){
+        scanf("%s", str);
+        int c = 0;
+        for(int i = 0; str[i] && c >= 0; i++) str[i] == '(' ? c++ : c--;
+        if(c == 0)
+            printf("YES\n");
+        else
+            printf("NO\n");
+    }
 }

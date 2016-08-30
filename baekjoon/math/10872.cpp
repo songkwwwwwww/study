@@ -26,6 +26,10 @@ typedef long long ll;
 
 */
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("10872.txt", "r", stdin);
+    int N, ans=1;
+    scanf("%d", &N);
+    for(int i = 1; i <= N; i++)
+        ans *= i;
+    printf("%d\n", ans);
 }

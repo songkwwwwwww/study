@@ -25,7 +25,16 @@ typedef long long ll;
 /*
 
 */
+char str[101];
+int alpha[26];
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("10808.txt", "r", stdin);
+    scanf("%s", str);
+    for(int i = 0; str[i]; i++){
+        alpha[str[i] - 'a']++;
+    }
+    for(int i = 0; i < 26; i++){
+        printf("%d ", alpha[i]);
+    }
+    printf("\n");
 }

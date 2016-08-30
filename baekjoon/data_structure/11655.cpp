@@ -25,7 +25,19 @@ typedef long long ll;
 /*
 
 */
+char str[101];
 int main(){
-    freopen(".txt", "r", stdin);
+    freopen("11655.txt", "r", stdin);
+    gets(str);
 
+    for(int temp, i = 0; str[i]; i++){
+        char& c = str[i];
+        if('a' <= c && c <= 'z'){
+            c = ((c - 'a' + 13) % 26 ) + 'a';        
+        }
+        else if( 'A' <= c && c <= 'Z'){
+            c = ((c - 'A' + 13) % 26 ) + 'A';
+        }
+    }
+    printf("%s\n", str);
 }

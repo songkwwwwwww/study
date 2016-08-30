@@ -25,7 +25,16 @@ typedef long long ll;
 /*
 
 */
+char str[1001];
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("11656.txt", "r", stdin);
+    scanf("%s", str);
+    vector<string> v; v.reserve(1000);
+    for(int i = 0; str[i]; i++){
+        string s(str + i);
+        v.push_back(s);
+    }
+    sort(v.begin(), v.end());
+    for(int i; i < v.size(); i++)
+        printf("%s\n", v[i].c_str());
 }
