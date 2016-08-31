@@ -27,7 +27,22 @@ typedef long long ll;
 /*
 
 */
-int main(){
-    freopen(".txt", "r", stdin);
 
+char str[1001];
+int main(){
+    freopen("LECTURE.txt", "r", stdin);
+    int TC; scanf("%d", &TC);
+    while(TC--){
+        scanf("%s", str);
+        vector<string> v;
+        v.reserve(500);
+        for(int i = 0; str[i]; i+=2){
+            string s(str + i, 2);
+            v.push_back(s);
+        }
+        sort(v.begin(), v.end());
+        for(int i = 0; i < v.size(); i++)
+            printf("%s", v[i].c_str());
+        printf("\n");
+    }
 }

@@ -28,6 +28,24 @@ typedef long long ll;
 
 */
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("MEETING.txt", "r", stdin);
+    int TC; scanf("%d", &TC);
+    while(TC--){
+        int N; // 1 <= N <= 10000
+        scanf("%d", &N);
+        vector<int> mans(N);
+        vector<int> women(N);
+        for(int i = 0; i < N; i++)
+            scanf("%d", &mans[i]);
+        for(int i = 0; i < N; i++)
+            scanf("%d", &women[i]);
+        
+        sort(mans.begin(), mans.end());
+        sort(women.begin(), women.end());
+        int result = 0;
+        for(int i = 0; i < N; i++){
+            result += abs(mans[i] - women[i]);
+        }
+        printf("%d\n", result);
+    }
 }
