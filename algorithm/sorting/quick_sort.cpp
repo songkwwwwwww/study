@@ -49,3 +49,25 @@ int main(){
 	std::cout << std::endl;
 }
 
+
+/*
+정올 교재
+void swap(int a, int b) {
+	int t = S[a];
+	S[a] = S[b];
+	S[b] = t;
+}
+void quick_sort(int s, int e) {
+	if(s<e){
+		int p = s, l = s+1, r = e;
+		while(l<=r){
+			while(l<= e && S[l]<=S[p]) l++;
+			while(r>=s+1 && S[r]>=S[p]) r‐‐;
+			if(l<r) swap(l,r);
+		}
+		swap(p, r);
+		quick_sort(s, r‐1);
+		quick_sort(r+1, e);
+	}
+}
+*/
