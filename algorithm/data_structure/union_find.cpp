@@ -5,7 +5,7 @@ int Find(int x){
 		return x;
 	}
 	else{
-		return p[x] = find(p[x]);
+		return p[x] = Find(p[x]);
 	}
 }
 
