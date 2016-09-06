@@ -62,7 +62,7 @@ vector<int> dijkstra2(int src){
     vector<int> dist(V, INF);
     // 각 정점을 방문했는지 여부를 저장한다.
     vector<bool> visited(V, false);
-    dist[src] = 0; visited[src] = true;
+    dist[src] = 0;
     while(true){
         // 아직 방문하지 않은 정점 중 가장 가까운 정점을 찾는다.
         int closest = INF, here;
