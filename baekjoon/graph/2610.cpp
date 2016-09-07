@@ -9,8 +9,6 @@
 #include <set>
 
 #include <map>
-#include <unordered_map>
-
 #include <utility> // std::pair
 
 #include <functional> // greater, less
@@ -40,6 +38,6 @@ const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 
 int main(){
-    freopen(".txt", "r", stdin);
+    freopen("2610.txt", "r", stdin);
 
 }
