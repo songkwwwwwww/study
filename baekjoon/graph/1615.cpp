@@ -36,10 +36,38 @@ const int MAX_V = 20000;
 /*
 
 */
+const int MAX_N = 2000;
+int N, M;
+vector<pair<int, int> > vec;
+
 
 
 
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("1615.txt", "r", stdin);
+    scanf("%d %d", &N, &M);
+    
+    vec.reserve(N * (N - 1) / 2 + 1);
+    for(int u, v, i = 0; i < M; i++){
+        scanf("%d %d", &u, &v);
+        vec.push_back(make_pair(u, v));
+    }
+    sort(vec.begin(), vec.end());
+    int n = vec.size();
+    /*
+    for(int i = 0; i < vec.size(); i++){
+        cout <<vec[i].first <<" "<<vec[i].second << endl;
+    }*/
+    int d[2000] = {0};
+    for(int i = 0; i < n; i++){
+        d[i] = 1;
+        for(int j = 0; j < i; j++){
+            if(vec[j].second < vec[i].second && d[i] < d[j] + 1)
+                d[i] = d[j] + 1;
+        }
+    }
+    int ans = 0;
+    for(int i = 0; i< n; i++)
+        ans = MAX(ans, d[i]);
+    printf("%d\n", M - ans);
 }

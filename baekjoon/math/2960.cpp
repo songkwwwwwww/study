@@ -27,11 +27,11 @@ using namespace std;
 
 typedef long long ll;
 
-const int dx[4] = {0, 0, 1, -1}; // E W S N;
-const int dy[4] = {1, -1, 0, 0}; // E W S N;
-
 const int INF = 987654321;
 const int MAX_V = 20000;
+
+const int dx[4] = {0, 0, 1, -1}; // E W S N;
+const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 /*
 
@@ -39,7 +39,24 @@ const int MAX_V = 20000;
 
 
 
-int main(){
-    freopen(".txt", "r", stdin);
+int solve(int N, int K){
+    vector<bool> is_prime(N + 1, true);
+    int ans, count = 0;
+    for(int i = 2; i <= N; i++){
+        if(is_prime[i] == false) continue;
+        for(int j = i ; j <= N; j += i){
+            if(is_prime[j] == false) continue;
 
+            is_prime[j] = false;
+            count++;
+            if(count == K) return j;
+        }
+    }
+    return -1;
+}
+int main(){
+    freopen("2960.txt", "r", stdin);
+    int N, K;
+    scanf("%d %d", &N, &K);
+    printf("%d\n", solve(N, K));
 }

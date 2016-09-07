@@ -35,7 +35,7 @@ int kruskal(vector<pair<int, int> >& selected){
         // 간선 (u, v)를 검사한다.
         int cost = edges[i].first;
         int u = edges[i].second.first, v = edges[i].second.second;
-        // 이미 u와 v가 연격ㄹ되어 있을 경우 무시한다.
+        // 이미 u와 v가 연결되어 있을 경우 무시한다.
         if(sets.find(u) == sets.find(v)) continue;
         // 이 둘을 합친다.
         sets.merge(u, v);
