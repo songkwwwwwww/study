@@ -27,6 +27,11 @@ using namespace std;
 
 typedef long long ll;
 
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+
+typedef queue<int> QI;
+
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
