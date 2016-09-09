@@ -16,7 +16,7 @@ bool dfs(int a){
     if(visited[a]) return false;
     visited[a] = true;
     for(int b = 0; b < m; b++){
-        if(ad[a][b]){
+        if(adj[a][b]){
             if(b_match[b] == -1 || dfs(b_match[b])){
                 // 증가 경로 발견. a와 b를 매칭시킨다.
                 a_match[a] = b;
