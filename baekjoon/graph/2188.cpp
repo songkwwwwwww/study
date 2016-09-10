@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,34 +27,39 @@ using namespace std;
 
 typedef long long ll;
 
-typedef vector<int> VI;
-typedef vector<VI> VVI;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-typedef queue<int> QI;
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
 
+
 /*
 
 */
 
 const int MAX_N = 200;
-const int MAX_M = MAX_N * 2 + 2;
-const int S = MAX_M - 2; // source
-const int T = MAX_M - 1; // sink
+const int MAX_M = 200;
+const int MAX_V = 200 * 2 + 2;
+
+const int S = MAX_V - 2; // source
+const int T = MAX_V - 1; // sink
 
 int N, M;
+
 
 int main(){
     freopen("2188.txt", "r", stdin);
     scanf("%d %d", &N, &M);
-    VVI c(MAX_M, VI(MAX_M));
-    VVI f(MAX_M, VI(MAX_M));
     
-    vector<int> adj[MAX_M];
+    vvi c(MAX_V, vi(MAX_V));
+    vvi f(MAX_V, vi(MAX_V));
+    
+    vector<int> adj[MAX_V];
 
     for(int n, v, u = 0; u < N; u++){
         scanf("%d", &n);
@@ -75,17 +80,16 @@ int main(){
         adj[u].push_back(T);
         adj[T].push_back(u);
     }
-
     int total = 0;
     while(true){
-        QI q;
+        qi q;
         q.push(S);
-        VI prev(MAX_M, -1);
+        vi prev(MAX_V, -1);
 
         while(!q.empty()){
             int here = q.front(); q.pop();
 
-            for(int i; i < adj[here].size(); i++){
+            for(int i = 0; i < adj[here].size(); i++){
                 int there = adj[here][i];
 
                 if(c[here][there] - f[here][there] > 0 && prev[there] == -1){

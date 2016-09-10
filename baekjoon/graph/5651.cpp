@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm> // std::max, std::min, std::sort, std::swap
@@ -10,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -28,15 +27,16 @@ using namespace std;
 
 typedef long long ll;
 
-typedef vector<int> VI;
-typedef vector<VI> VVI;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-typedef queue<int> QI;
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
+
 
 /*
 
@@ -51,9 +51,9 @@ int main(){
     int TC; scanf("%d", &TC);
     while(TC--){
         scanf("%d %d", &N, &M);
-        VI adj[N];
-        VVI c(N, VI(N));
-        VVI f(N, VI(N));
+        vi adj[N];
+        vvi c(N, vi(N));
+        vvi f(N, vi(N));
         for(int u, v, w, i = 0; i < M; i++){
             scanf("%d %d %d", &u, &v, &w);
             u--; v--;
@@ -64,9 +64,9 @@ int main(){
 
         int total_count = 0, S = 0, T = N - 1;
         while(true){
-            QI q;
+            qi q;
             q.push(S);
-            VI prev(N, -1);
+            vi prev(N, -1);
             while(!q.empty()){
                 int here = q.front(); q.pop();
                 for(int i = 0; i < adj[here].size(); i++){

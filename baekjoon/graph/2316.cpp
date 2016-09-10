@@ -92,7 +92,7 @@ int main(){
         if(prev[T] == -1) break;
         for(int i = T; i != S; i = prev[i]){
             f[prev[i]][i]++;
-            f[i][prev[i]]++;
+            f[i][prev[i]]--;
         }
         total++;
     }

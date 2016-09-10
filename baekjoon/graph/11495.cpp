@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,16 +27,15 @@ using namespace std;
 
 typedef long long ll;
 
-typedef vector<int> VI;
-typedef vector<VI> VVI;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-typedef queue<int> QI;
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MAX_V = 20000;
 
 /*
 입력
@@ -49,6 +48,9 @@ const int MAX_V = 20000;
 각 테스트 케이스마다 필요한 연산의 최소 횟수를 한 줄에 출력한다.
 */
 
+const int MAX_N = 50;
+const int MAX_M = 50;
+const int MAX_V = MAX_N * MAX_N+2;
 
 int N, M;
 int m[50][50];
@@ -66,12 +68,11 @@ int main(){
     int TC; scanf("%d", &TC);
     while(TC--){
         scanf("%d %d", &N, &M);
-        int V = N * M;
+        int V = N * M + 2;
         int total_value = 0;
-        VVI m(N, VI(M));
-        VI adj[V + 2];
-        VVI c(V + 2, VI(V + 2));
-        VVI f(V + 2, VI(V + 2));
+        vvi m(N, vi(M));
+        vi adj[V];
+        int c[V][V] = {0}, f[V][V] = {0};
         
 
         for(int i = 0; i < N; i++)
@@ -80,21 +81,21 @@ int main(){
                 total_value += m[i][j];
             }
         
-        int S = V, T = V + 1;
+        int S = V - 2, T = V - 1;
         for(int x = 0; x < N; x++){
             for(int y = 0; y < M; y++){
                 int here = x * M + y;
-
                 if((x + y) % 2 == 0){
                     c[S][here] = m[x][y];
                     adj[S].push_back(here);
                     adj[here].push_back(S);
+                    
                     for(int nx, ny, d = 0; d < 4; d++){
                         nx = x + dx[d];
                         ny = y + dy[d];
                         int there = nx * M + ny;
                         if(is_range(nx, ny)){
-                            c[here][there] = 1;
+                            c[here][there] = INF;
                             adj[here].push_back(there);
                             adj[there].push_back(here);
                         }
@@ -105,15 +106,14 @@ int main(){
                     adj[here].push_back(T);
                     adj[T].push_back(here);
                 }
-
             }
         }
         
         int total_flow = 0;
         while(true){
-            QI q;
+            qi q;
             q.push(S);
-            VI prev(V + 2, -1);
+            vi prev(V, -1);
             
             while(!q.empty()){
                 int here = q.front(); q.pop();

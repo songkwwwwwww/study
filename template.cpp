@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,20 +27,22 @@ using namespace std;
 
 typedef long long ll;
 
-typedef vector<int> VI;
-typedef vector<VI> VVI;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
-typedef queue<int> QI;
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MAX_V = 20000;
 
 /*
 
 */
+
+const int MAX_N = 100;
+const int MAX_M = 100;
 
 
 
