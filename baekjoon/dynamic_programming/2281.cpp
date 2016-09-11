@@ -54,7 +54,7 @@ int solve(int word_index, int col){
     // base case
     if(word_index == N) return 0;
     if(col >= M) return solve(word_index + 1, len[word_index] + 1) + (col == M ? 1 : 0);
-
+    // col < M
     int& ret = d[word_index][col];
     if(ret != -1) return ret;
 
