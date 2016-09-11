@@ -36,7 +36,7 @@ int bipartite_match(){
     int size = 0;
     for(int start = 0; start < n; start++){
         visited = vector<bool>(n, false);
-        // dfs를 이영해 start에서 시작하는 증가 경로를 찾는다.
+        // dfs를 이용해 start에서 시작하는 증가 경로를 찾는다.
         if(dfs(start))
             ++size;
     }

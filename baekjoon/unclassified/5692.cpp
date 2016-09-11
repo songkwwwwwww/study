@@ -47,7 +47,19 @@ const int INF = 987654321;
 const int MAX_N = 8;
 const int MAX_M = 8;
 
+int factorials[6];
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("5692.txt", "r", stdin);
+    factorials[1] = 1;
+    for(int i = 2; i <= 5; i++)
+        factorials[i] = factorials[i - 1] * i;
+    int num;
+    while(scanf("%d", &num) && num != 0){
+        int sum = 0, p = 1;
+        while(num != 0){
+            sum += ((num % 10) * factorials[p++]);
+            num /= 10;
+        }
+        printf("%d\n", sum);
+    }
 }

@@ -44,10 +44,32 @@ const int INF = 987654321;
 
 */
 
-const int MAX_N = 8;
-const int MAX_M = 8;
+const int MAX_N = 100;
+const int MAX_M = 100;
+
+int N;
+int a[1000];
+int d[1000];
+int solve(int index){
+    if(index >= N-1) return 0;
+    
+    int& ret = d[index];
+    if(ret != -1) return ret;
+    ret = INF; 
+    
+    for(int i = 1; i <= a[index]; i++){
+        ret = min(ret, solve(index + i) + 1);
+    }
+    return ret;
+}
 
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("11060.txt", "r", stdin);
+    scanf("%d", &N);
+    for(int i = 0; i < N; i++)
+        scanf("%d", &a[i]);
+    memset(d, -1, sizeof(d));
+    int result = solve(0);
+    if(result == INF) printf("-1\n");
+    else printf("%d\n", result);
 }

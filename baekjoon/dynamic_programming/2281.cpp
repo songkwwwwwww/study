@@ -44,10 +44,31 @@ const int INF = 987654321;
 
 */
 
-const int MAX_N = 8;
-const int MAX_M = 8;
+const int MAX_N = 1000;
+const int MAX_M = 1000;
+int N, M;
+int len[MAX_N];
+int d[MAX_N][MAX_M];
+
+int solve(int word_index, int col){
+    // base case
+    if(word_index == N) return 0;
+    if(col >= M) return solve(word_index + 1, len[word_index] + 1) + (col == M ? 1 : 0);
+
+    int& ret = d[word_index][col];
+    if(ret != -1) return ret;
+
+    ret = solve(word_index + 1, len[word_index] + 1) + (M - col + 1) * (M - col + 1);
+    if(col + len[word_index] <= M) ret = min(ret, solve(word_index + 1, col + len[word_index] + 1));
+    return ret;
+}
 
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("2281.txt", "r", stdin);
+    scanf("%d %d", &N, &M);
+    for(int i = 0; i < N; i++)
+        scanf("%d", &len[i]);
+    memset(d, -1, sizeof(d));
+    printf("%d\n", solve(0, 0));
+    //printf("%d\n", solve(1, len[0] + 1));
 }
