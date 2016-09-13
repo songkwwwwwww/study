@@ -41,37 +41,28 @@ const int dy[4] = {1, -1, 0, 0}; // E W S N;
 const int INF = 987654321;
 
 /*
+입력
+첫 번째 줄에는 석판의 크기 N(1≤N≤20)이 들어온다. 
+다음 줄부터 N줄에 걸쳐서 석판의 상태가 입력으로 들어온다. 
+여기서 1은 불순물을 의미하며, 2는 보석 결정체, 0은 불순물과 보석결정체가 존재하지 않는 곳을 의미한다. 
+이 때, 보석 결정체의 수는 15개를 넘지 않으며, 각 줄에 주어지는 석판의 정보는 공백 하나로 구분한다.
 
+출력
+각각의 석판 안에 불순물이 없으면서 단 하나의 보석 결정체만이 있도록 주어진 석판을 나눌 때, 
+모두 몇 가지의 경우가 존재하는지를 출력하시오. 
+이 때 가능한 경우가 존재하지 않으면 -1을 출력한다.
 */
 
-int solve(int x, int y, int n){
-    if(n == 1) return 0;
-    else{
-        int m = n / 2;
-        if(x < m){
-            if(y < m){
-                return solve(x, y, m);
-            }
-            else{ // y >= m
-                return m * m + solve(x, y - m, m);
-            }
-        }
-        else{ // x >= m
-            if(y < m){ 
-                return 2 * m * m + solve(x - m, y, m);                
-            }
-            else{ // y >= m
-                return 3 * m * m + solve(x - m, y - m, m);                
-            }
-        }
-    }
-
-}
+const int MAX_N = 20;
+int N;
+int a[MAX_N][MAX_N];
 
 int main(){
-    freopen("1074.txt", "r", stdin);
-    int N, r, c;
-    while(cin >> N >> r >> c){
-        printf("%d\n", solve(r, c, 2 << N));
-    }
+    freopen("2339.txt", "r", stdin);
+    scanf("%d", &N);
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < N; j++)
+            scanf("%d", &a[i][j]);
+    
+
 }

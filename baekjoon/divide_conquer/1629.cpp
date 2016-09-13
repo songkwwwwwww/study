@@ -44,34 +44,22 @@ const int INF = 987654321;
 
 */
 
-int solve(int x, int y, int n){
-    if(n == 1) return 0;
-    else{
-        int m = n / 2;
-        if(x < m){
-            if(y < m){
-                return solve(x, y, m);
-            }
-            else{ // y >= m
-                return m * m + solve(x, y - m, m);
-            }
-        }
-        else{ // x >= m
-            if(y < m){ 
-                return 2 * m * m + solve(x - m, y, m);                
-            }
-            else{ // y >= m
-                return 3 * m * m + solve(x - m, y - m, m);                
-            }
-        }
-    }
+const int MAX_N = 8;
+const int MAX_M = 8;
 
+int A, B, MOD;
+
+ll solve(int n, int k){
+    if(k == 0) return 1;
+
+    ll temp = solve(n, k / 2) % MOD;
+    ll ans = temp * temp % MOD;
+    if(k % 2 == 1) ans = ans * n % MOD;
+    return ans;
 }
 
 int main(){
-    freopen("1074.txt", "r", stdin);
-    int N, r, c;
-    while(cin >> N >> r >> c){
-        printf("%d\n", solve(r, c, 2 << N));
-    }
+    freopen("1629.txt", "r", stdin);
+    scanf("%d %d %d", &A, &B, &MOD);
+    printf("%lld\n", solve(A, B));
 }
