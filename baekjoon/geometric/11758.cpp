@@ -44,41 +44,10 @@ const int INF = 987654321;
 
 */
 
-const int MAX_N = 10;
-int val[10], cnt[8][10], result;
-bool used[10];
+const int MAX_N = 8;
+const int MAX_M = 8;
 
 int main(){
-    freopen("1339.txt", "r", stdin);
-	int N, m = 0;
-	cin >> N;
-	string S[10];
-	for(int i = 0; i < N; i++){
-		cin >> S[i];
-		if(S[i].size() < 8) S[i] = string(8-S[i].size(), '0') + S[i];
-	}
-	sort(S, S+N);
-	for(int i = 0; i < N; i++){
-		cout << S[i] << endl;
-	}
-	cout << "==========" << endl;
-	for(int i = 0; i < 8; i++){
-		for(int j = N -1; j >= 0; j--){
-			if(S[j][i] >= 'A'){
-				char c = S[j][i];
-				for(int k = 0; k < N; k++){
-					for(int l = 0; l < S[k].size(); l++){
-						if(S[k][l] == c){
-							cnt[8 - S[k].size() + l][m]++;
-							S[k][l] = '0' + m;
-						}
-					}
-				}
-				m++;
-			}
-		}
-	}
-	for(int i = 0; i < N; i++){
-		cout << S[i] << endl;
-	}
+    freopen(".txt", "r", stdin);
+
 }

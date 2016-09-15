@@ -44,7 +44,7 @@ bool visited[100][100];
 int dx[4] = {0, 0, 1, -1};
 int dy[4] = {1, -1, 0, 0};
 
-inline bool is_safe(int x, int y){
+inline bool is_range(int x, int y){
     if(0 <= x && x < N && 0 <= y && y < N)
         return true;
     else
@@ -53,10 +53,12 @@ inline bool is_safe(int x, int y){
 
 int dfs(int x, int y, int height){
     visited[x][y] = true;
-    for(int i = 0; i < 4; i++)
-        if(is_safe(x + dx[i], y + dy[i]) && !visited[x + dx[i]][y + dy[i]] &&
-            m[x + dx[i]][y + dy[i]] > height)
-            dfs(x + dx[i], y + dy[i], height);
+    for(int nx, ny, i = 0; i < 4; i++){
+        nx = x + dx[i];
+        ny = y + dy[i];
+        if(is_range(nx, ny) && !visited[nx][ny] && m[nx][ny] > height)
+            dfs(nx, ny, height);
+    }
 }
 
 int solve(int height){
@@ -84,7 +86,7 @@ int main(){
         }
 
     int result, ans = 0;
-    for(int height = 1; height <= max_height; height++){
+    for(int height = 0; height < max_height; height++){
         result = solve(height);
         ans = MAX(ans, result);
         memset(visited, false, sizeof(visited));

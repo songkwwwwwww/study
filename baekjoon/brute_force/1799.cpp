@@ -24,9 +24,6 @@ using namespace std;
 
 typedef long long ll;
 
-
-
-
 /*
 입력
 첫째 줄에 체스판의 크기가 주어진다. 
@@ -48,32 +45,22 @@ const int dy[2] = {-1, 1}; // ;
 int board_size;
 int board[MAX_N][MAX_N];
 
-// id[dir][x][y] = dir 방향 대각선을 따라 인접한 빈 칸 묶음들 중
-// (x, y)가 속한 묶음의 번호
 int id[2][MAX_N][MAX_N];
 
-// A와 B의 정점 개수
-// adj[i][j] A_i 와 B_i가 연결되어 있는가?
 bool adj[MAX_N][MAX_N];
 
-
-// 이분 그래프의 정보
 int n, m;
 
-// 각 정점에 매칭된 상대 정점의 번호를 저장한다.
 vector<int> a_match, b_match;
 
-// dfs()의 방문 여부
 vector<bool> visited;
 
-// A의 정점인 a에서 B의 매칭되지 않은 정점으로 가는 경로를 찾는다.
 bool dfs(int a){
     if(visited[a]) return false;
     visited[a] = true;
     for(int b = 0; b < m; b++){
         if(adj[a][b]){
             if(b_match[b] == -1 || dfs(b_match[b])){
-                // 증가 경로 발견. a와 b를 매칭시킨다.
                 a_match[a] = b;
                 b_match[b] = a;
                 return true;
@@ -84,45 +71,44 @@ bool dfs(int a){
 }
 
 
-// a_match, b_match 배열을 계산하고 최대 매칭의 크기를 반환한다.
 int bipartite_match(){
-    // 처음에는 어떤 정점도 연결되어 있지 않다.
     a_match = vector<int>(n, -1);
     b_match = vector<int>(m, -1);
     int size = 0;
     for(int start = 0; start < n; start++){
         visited = vector<bool>(n, false);
-        // dfs를 이영해 start에서 시작하는 증가 경로를 찾는다.
         if(dfs(start))
             ++size;
     }
     return size;
 }
 
+inline bool is_range(int x, int y){
+    if(0 <= x && x < board_size && 0 <= y && y < board_size)
+        return true;
+    else
+        return false;
+} 
+
 int place_bishops(){
-    // 각 묶음에 번호를 붙인다.
     memset(id, -1, sizeof(id));
     int count[2] = {0, 0};
 
     for(int dir = 0; dir < 2; dir++)
         for(int x = 0; x < board_size; x++)
             for(int y = 0; y < board_size; y++)
-                if(board[x][y] == 1 && id[dir][x][y] == -1){
-                    int cx = x, cy = y;
-                    while(0 <= cx && cx < board_size &&
-                        0 <= cy && cy < board_size &&
-                        board[cx][cy] == 1){
-                            id[dir][cx][cy] = count[dir];
-                            cx += dx[dir];
-                            cy += dy[dir];
+                if(id[dir][x][y] == -1){
+                    int nx = x, ny = y;
+                    while(is_range(nx, ny)){
+                            id[dir][nx][ny] = count[dir];
+                            nx += dx[dir];
+                            ny += dy[dir];
                     }
                     count[dir]++;
                 }
-
-    // 이분 그래프를 만든다.
     n = count[0];
     m = count[1];
-    memset(adj, 0, sizeof(adj));
+    //memset(adj, 0, sizeof(adj));
     for(int x = 0; x < board_size; x++)
         for(int y = 0; y < board_size; y++)
             if(board[x][y] == 1)
