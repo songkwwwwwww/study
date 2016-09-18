@@ -26,3 +26,31 @@ int find(vector<int> &C, int x) {
 void merge(vector<int> &C, int x, int y) { 
 	C[find(C, x)] = find(C, y); 
 }
+
+
+
+/*
+	kks227
+
+*/
+
+int find(int n){
+	if(p[n] < 0) return n;
+	else return p[n] = find(p[n]);
+}
+
+void merge(int a, int b){
+	a = find(a);
+	b = find(b);
+	if(a == b) return;
+	p[b] = a;
+}
+
+void merge(int a, int b){
+	a = find(a);
+	b = find(b);
+	if(a == b) return;
+	p[a] += p[b];
+	p[b] = a;
+}
+

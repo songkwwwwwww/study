@@ -47,8 +47,11 @@ const int INF = 987654321;
 */
 
 
-const int MAX_N = 8;
-const int MAX_M = 8;
+const int MAX_N = 100;
+const int MAX_M = 1000;
+const int MAX_K = 14;
+int N, M, K;
+
 
 inline bool is_range(int x, int y){
     if(0 <= x && x < N && 0 <= y && y < M)
@@ -58,6 +61,6 @@ inline bool is_range(int x, int y){
 }
 
 int main(){
-    freopen(".txt", "r", stdin);
+    freopen("2001.txt", "r", stdin);
 
 }

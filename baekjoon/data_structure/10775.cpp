@@ -47,17 +47,39 @@ const int INF = 987654321;
 */
 
 
-const int MAX_N = 8;
-const int MAX_M = 8;
+const int MAX_G = 100000;
+const int MAX_P = 100000;
+int G, P;
+int p[MAX_G + 1];
 
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
+int find(int n){
+	if(p[n] < 0) return n;
+	else return p[n] = find(p[n]);
+}
+
+void merge(int a, int b){
+	a = find(a);
+	b = find(b);
+	if(a == b) return;
+	p[b] = a;
 }
 
 int main(){
-    freopen(".txt", "r", stdin);
+    freopen("10775.txt", "r", stdin);
+    scanf("%d %d", &G, &P);
+    int result = 0;
+    memset(p, -1 ,sizeof(p));
+    for(int i = 0; i < P; i++){
+        int g, root;
+        scanf("%d", &g);
 
+        root = find(g);
+        if(root > 0){
+            result++;
+            merge(root - 1, root);
+        }
+        else 
+            break;
+    }
+    printf("%d\n", result);
 }

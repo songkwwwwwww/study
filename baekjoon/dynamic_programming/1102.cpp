@@ -46,18 +46,49 @@ const int INF = 987654321;
 
 */
 
+const int MAX_N = 16;
+int N, P, cnt;
 
-const int MAX_N = 8;
-const int MAX_M = 8;
 
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
+int w[MAX_N][MAX_N];
+int d[1<<16];
+
+int solve(int state){
+    int& ret = d[state];
+    if(ret != -1) return ret;
+    if(cnt >= P) return ret = 0;
+
+    ret = INF;
+    cnt++;
+    for(int i = 0; i < N; i++){
+        if(state & (1 << i)){
+            for(int j = 0; j < N; j++){
+                if(!(state & (1 << j))){
+                    ret = min(ret, solve(state | (1 << j)) + w[i][j]);
+                }
+            }
+        }
+    }
+    cnt--;
+    return ret;
 }
 
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("1102.txt", "r", stdin);
+    scanf("%d", &N);
+    int state = 0;
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < N; j++)
+            scanf("%d", &w[i][j]);
+    char c;
+    for(int i = 0; i < N; i++){
+        scanf(" %c", &c);
+        if(c == 'Y'){
+            cnt++;
+            state |= (1 << i);
+        }
+    }
+    scanf("%d", &P);
+    memset(d, -1, sizeof(d));
+    printf("%d\n", solve(state));
 }
