@@ -59,8 +59,8 @@ const int MAX_V = MAX_N + 2;
 int V, S, T;
 
 vi level, work;
-vvi c(MAX_V, vi(MAX_V)), f(MAX_V, vi(MAX_V));
-//vvi c, f;
+//vvi c(MAX_V, vi(MAX_V)), f(MAX_V, vi(MAX_V));
+vvi c, f;
 vi adj[MAX_V];
 
 bool bfs(){
@@ -109,6 +109,8 @@ int main(){
     scanf("%d", &N);
     V = N + 2;
     S = V - 2, T = V - 1;
+    c = vvi(V, vi(V));
+    f = vvi(V, vi(V));
     for(int team, u = 0; u < N; u++){
         scanf("%d", &team);
         if(team == 1){
