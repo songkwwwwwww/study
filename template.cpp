@@ -32,6 +32,9 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 typedef vector<vi> vvi;
 
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
 typedef vector<bool> vb;
 typedef vector<vb> vvb;
 
