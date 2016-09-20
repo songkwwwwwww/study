@@ -51,17 +51,21 @@ const int INF = 987654321;
 
 
 const int MAX_N = 8;
-const int MAX_M = 8;
 
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
-}
+
 
 int main(){
-    freopen(".txt", "r", stdin);
-    //setbuf(stdout, NULL);
-
+    freopen("prob_id_1.txt", "r", stdin);
+    setbuf(stdout, NULL);
+    int TC; scanf("%d", &TC);
+    for(int tc = 1; tc <= TC; tc++){
+        int N;
+        scanf("%d", &N);
+        unsigned int a = 0, b = 0;
+        for(int i = 0; i < N; i++){
+            scanf("%u", &b);
+            a = a ^ b;
+        }
+        printf("Case #%d\n%d\n", tc, a);
+    }
 }

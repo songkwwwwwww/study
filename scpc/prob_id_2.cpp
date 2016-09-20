@@ -50,18 +50,39 @@ const int INF = 987654321;
 */
 
 
-const int MAX_N = 8;
-const int MAX_M = 8;
+const int MAX_N = 300000;
 
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
+bool cmp(int a, int b){
+    if( a > b)
         return true;
     else
         return false;
 }
 
-int main(){
-    freopen(".txt", "r", stdin);
-    //setbuf(stdout, NULL);
+int a[MAX_N];
 
+int main(){
+    freopen("prob_id_2.txt", "r", stdin);
+    setbuf(stdout, NULL);
+    int TC; scanf("%d", &TC);
+    for(int tc = 1; tc <= TC; tc++){
+        int N;
+        scanf("%d", &N);
+        for(int i = 0; i < N; i++){
+            scanf("%d", &a[i]);
+        }
+        sort(a, a + N);
+        int max_val = 0, cnt = 0;
+        for(int i = 0; i < N; i++){
+            if(a[i] + N - i > max_val)
+                max_val = a[i] + N - i;
+        }
+        for(int i = N - 1; i >= 0; i--){
+            if(max_val <= a[i] + N)
+                cnt++;
+            else
+                break;
+        }
+        printf("Case #%d\n%d\n", tc, cnt);
+    }
 }

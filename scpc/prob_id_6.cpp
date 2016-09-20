@@ -61,7 +61,6 @@ inline bool is_range(int x, int y){
 }
 
 int main(){
-    freopen(".txt", "r", stdin);
-    //setbuf(stdout, NULL);
-
+    freopen("prob_id_6.txt", "r", stdin);
+    
 }

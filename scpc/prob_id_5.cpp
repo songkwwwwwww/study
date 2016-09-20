@@ -44,24 +44,20 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
+const int MOD = 1000000007;
 
 /*
 
 */
 
-
 const int MAX_N = 8;
-const int MAX_M = 8;
-
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
-}
 
 int main(){
-    freopen(".txt", "r", stdin);
-    //setbuf(stdout, NULL);
-
+    freopen("prob_id_5.txt", "r", stdin);
+    setbuf(stdout, NULL);
+    int TC; scanf("%d", &TC);
+    for(int tc = 1; tc <= TC; tc++){
+        int N, M;        
+        printf("Case #%d\n%d\n", tc, sum);
+    }
 }

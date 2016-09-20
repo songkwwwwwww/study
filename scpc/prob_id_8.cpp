@@ -49,19 +49,32 @@ const int INF = 987654321;
 
 */
 
-
-const int MAX_N = 8;
-const int MAX_M = 8;
-
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
-}
+int ldp[100000], rdp[100000];
+int n, data[100000];
 
 int main(){
-    freopen(".txt", "r", stdin);
-    //setbuf(stdout, NULL);
+    freopen("prob_id_8.txt", "r", stdin);
+    setbuf(stdout, NULL);
+    int TC; scanf("%d", &TC);
+    for(int tc = 1; tc <= TC; tc++){
+        scanf("%d", &n);
+		for(int i = 0; i < n; i++) scanf("%d", data + i);
+		ldp[0] = 1;
+		for(int i = 1; i < n; i++) {
+			int cand = ldp[i - 1] + 1;
+			ldp[i] = min(cand, data[i]);
+		}
+		rdp[n - 1] = 1;
+		for(int i = n - 2; i >= 0; i--) {
+			int cand = rdp[i + 1] + 1;
+			rdp[i] = min(cand, data[i]);
+		}
 
+		int ans = 0;
+		for(int i = 0; i < n; i++) 
+            ans = max(ans, min(ldp[i], rdp[i]));
+		printf("Case #%d\n%d\n", tc, ans);
+    }
 }
+
+		
