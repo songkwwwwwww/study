@@ -5,6 +5,7 @@
 
 // A와 B의 정점 개수
 int n, m;
+
 // adj[i][j] A_i 와 B_i가 연결되어 있는가?
 bool adj[MAX_N][MAX_M];
 // 각 정점에 매칭된 상대 정점의 번호를 저장한다.
