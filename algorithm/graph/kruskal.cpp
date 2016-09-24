@@ -21,7 +21,7 @@ int kruskal(vector<pair<int, int> >& selected){
     int ret = 0;
     selected.clear();
     // ( 가중치, (정점 1, 정점 2) )의 목록을 얻는다.
-    vecotr<pair<int, pair<int, int> > > edges;
+    vector<pair<int, pair<int, int> > > edges;
     for(int u = 0; u < V; u++)
         for(int i = 0; i < adj[u].size(); i++){
             int v = adj[u][i].first, cost = adj[u][i].second;
