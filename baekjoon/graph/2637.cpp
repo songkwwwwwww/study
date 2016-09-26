@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,10 +27,24 @@ using namespace std;
 
 typedef long long ll;
 
+typedef pair<int, int> pii;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+
+typedef queue<int> qi;
+
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
+
 
 /*
 입력
@@ -46,46 +60,58 @@ const int MAX_N = 100;
 const int MAX_M = 100;
 int N, M;
 
-vector< pair<int, int> > adj[MAX_N];
-int in_degree[MAX_N];
-int need[MAX_N][MAX_N];
+vector< pii > adj[MAX_N];
+//int in_degree[MAX_N];
+//int need[MAX_N][MAX_N];
 
 int main(){
     freopen("2637.txt", "r", stdin);
     scanf("%d %d", &N, &M);
+    vi in_degree(N);
+    vvi need(N, vi(N));
     for(int X, Y, K, i = 0; i < M; i++){
         scanf("%d %d %d", &X, &Y, &K);
+        // X <- Y
         X--; Y--;
         adj[Y].push_back(make_pair(X, K));
         in_degree[X]++;
     }
-    queue<int> q;
-    vector<int> basic_item;
-    basic_item.reserve(50);
-    for(int i = 0; i < N; i++)
+    qi q;
+    vi basic_item;
+    //basic_item.reserve(50);
+    for(int i = 0; i < N; i++){
         if(in_degree[i] == 0){
             q.push(i);
             basic_item.push_back(i);
             need[i][i] = 1;
         }
-
+    }
+    //printf("sizeof basic_item : %d\n", (int)basic_item.size());
     while(!q.empty()){
         int here = q.front(); q.pop();
 
         for(int i = 0; i < adj[here].size(); i++){
             int there = adj[here][i].first;
             int weight = adj[here][i].second;
-            in_degree[there]--;
-            for(int j = 0; j < basic_item.size(); j++)
-                need[there][basic_item[j]] += need[here][basic_item[j]] * weight;
+
+            for(int j = 0; j < basic_item.size(); j++){
+                need[there][j] += need[here][j] * weight;
+            }
+                
+                //need[there][basic_item[j]] += need[here][basic_item[j]] * weight;
             
-            if(in_degree[there] == 0)
+            //in_degree[there]--;
+            if(--in_degree[there] == 0)
                 q.push(there);
         }
     }
     
+    //for(int i : basic_item)
+    //    printf("%d\n", i);
+
     for(int i = 0; i < basic_item.size(); i++)
-        printf("%d %d\n", i + 1, need[N - 1][basic_item[i]]);
+        printf("%d %d\n", i + 1, need[N - 1][i]);
+        
+        //printf("%d %d\n", i + 1, need[N - 1][basic_item[i]]);
 
 }
-
