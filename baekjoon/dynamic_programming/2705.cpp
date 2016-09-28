@@ -27,8 +27,13 @@ using namespace std;
 
 typedef long long ll;
 
+typedef pair<int, int> pii;
+
 typedef vector<int> vi;
 typedef vector<vi> vvi;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
 
 typedef vector<bool> vb;
 typedef vector<vb> vvb;
@@ -41,39 +46,41 @@ const int dy[4] = {1, -1, 0, 0}; // E W S N;
 const int INF = 987654321;
 
 /*
+입력
+첫째 줄에 테스트 케이스의 개수 T(1 <= T <= 1,000)가 주어진다. 
+각 테스트 케이스는 양의 정수 1개로 이루어져있고, 이 수가 문제에서 설명한 N이고, 1,000보다 작거나 같다.
 
+출력
+각 테스트 케이스에 대해 한 줄에 하나씩 N의 재귀적인 팰린드롬 파티션의 개수를 출력한다.
 */
+
 
 const int MAX_N = 1000;
-const int MAX_M = 1000;
-int N, M;
-int len[MAX_N];
-int d[MAX_N][MAX_M];
-
-/*
-    적어야 할 이름이 word_index번째 이름이고
-    현재 col번 열에 있을 때
-    현재 행부터 발생하는 공백의 합의 최소 값 반환
-*/
-int solve(int word_index, int col){
+int N;
+vi d;
+int solve(int n){
     // base case
-    if(word_index == N) return 0;
-    if(col >= M) return solve(word_index + 1, len[word_index] + 1) + (col == M ? 1 : 0);
-    // col < M
-    int& ret = d[word_index][col];
+    if(n < 1) return 0;
+    if(n < 2) return 1;   
+
+    int& ret = d[n];
     if(ret != -1) return ret;
 
-    ret = solve(word_index + 1, len[word_index] + 1) + (M - col + 1) * (M - col + 1);
-    if(col + len[word_index] <= M) ret = min(ret, solve(word_index + 1, col + len[word_index] + 1));
+    ret = 1;
+    for(int i = 1; i <= n/2; i++){
+        ret += solve(i);
+    }
+
     return ret;
 }
 
 int main(){
-    freopen("2281.txt", "r", stdin);
-    scanf("%d %d", &N, &M);
-    for(int i = 0; i < N; i++)
-        scanf("%d", &len[i]);
-    memset(d, -1, sizeof(d));
-    printf("%d\n", solve(0, 0));
-    //printf("%d\n", solve(1, len[0] + 1));
+    freopen("2705.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    int TC; scanf("%d", &TC);
+    while(TC--){
+        scanf("%d", &N);
+        d = vi(N + 1, -1);
+        printf("%d\n", solve(N));
+    }
 }
