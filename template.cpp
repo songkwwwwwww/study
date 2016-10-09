@@ -54,10 +54,7 @@ const int MAX_N = 8;
 const int MAX_M = 8;
 
 inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
+    return (0 <= x && x < N && 0 <= y && y < N);
 }
 
 int main(){
