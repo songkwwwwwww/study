@@ -17,6 +17,6 @@ void eratosthenes(){
 		if(is_prime[i]){
 			for(int j = i * i; j <= n; j += i)
 				is_prime[j] = false;
-		}		
+		}
 	}
 }

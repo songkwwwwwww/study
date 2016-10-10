@@ -47,7 +47,7 @@ const int INF = 987654321;
 const int MAX_N = 8;
 const int MAX_M = 8;
 
-int A, B, MOD;
+ll A, B, MOD;
 
 ll solve(int n, int k){
     if(k == 0) return 1;
@@ -58,8 +58,25 @@ ll solve(int n, int k){
     return ans;
 }
 
+ll pow(ll n, ll k){
+    ll ans = 1;
+
+    while(k > 0){
+        if(k & 1){
+            ans *= n;
+            ans %= MOD;
+        }
+        n = n * n;
+        n %= MOD;
+        k /= 2;
+    }
+
+    return ans;
+}
+
 int main(){
     freopen("1629.txt", "r", stdin);
-    scanf("%d %d %d", &A, &B, &MOD);
-    printf("%lld\n", solve(A, B));
+    scanf("%lld %lld %lld", &A, &B, &MOD);
+    //printf("%lld\n", solve(A, B));
+    printf("%lld\n", pow(A, B));    
 }

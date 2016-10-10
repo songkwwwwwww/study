@@ -27,8 +27,9 @@ int main(){
     d[0] = 0;
     for(int i = 1; i <= N; i++){
         for(int j = a[i]; j <= K; j++){
-            if(d[j] > d[j - a[i]] + 1)
-                d[j] = d[j - a[i]] + 1;
+            d[j] = min(d[j], d[j - a[i]] + 1);
+            //if(d[j] > d[j - a[i]] + 1)
+            //    d[j] = d[j - a[i]] + 1;
         }
     }
     printf("%d\n", d[K] == INF ? -1 : d[K]);
