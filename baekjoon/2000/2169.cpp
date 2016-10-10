@@ -54,32 +54,27 @@ const int MAX_N = 1000;
 const int MAX_M = 1000;
 int N, M;
 int m[MAX_N][MAX_M];
-int d[MAX_N][MAX_M];
-bool visited[MAX_N][MAX_M];
+int d[MAX_N][MAX_M][2];
 
-inline bool is_range(int x, int y){
-    if(0 <= x && x < N && 0 <= y && y < M)
-        return true;
-    else
-        return false;
-}
 
-int solve(int x, int y){
-    if(x == N - 1 && y == M - 1) return m[N - 1][M - 1];
-    visited[x][y] = true;
+int solve(int x, int y, int is_right){
+    // base case
+    if(x >= N) return -INF;
+    if(x == N - 1 && y == M - 1) return m[x][y];
+    if(x == N - 1 && d == 0) return -INF;
     
-    int& ret = d[x][y];
+    int& ret = d[x][y][is_right];
     if(ret != -1) return ret; 
 
-    ret = m[x][y];
-    for(int i = 0; i < 3; i++){
-        int nx = x + dx[i];
-        int ny = y + dy[i];
-        if(is_range(nx, ny) && !visited[nx][ny]){
-            ret = max(ret, solve(nx, ny) + m[x][y]);
-        }
-    }
-    visited[x][y] = false;
+    ret = -INF;
+    
+    if(is_right && y < M - 1)
+        ret = m[x][y] + solve(x, y + 1, is_right); 
+    else if(!is_right && 0 < y) // left
+        ret = m[x][y] + solve(x, y - 1, is_right);
+
+    ret = max(ret, m[x][y] + max(solve(x + 1, y, 0), solve(x + 1, y, 1)));
+
     return ret;
 }
 
@@ -92,5 +87,5 @@ int main(){
             scanf("%d", &m[i][j]);
     
     memset(d, -1, sizeof(d));
-    printf("%d\n", solve(0, 0));
+    printf("%d\n", max(solve(0, 0, 0), solve(0, 0, 1)));
 }

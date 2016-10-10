@@ -78,6 +78,50 @@ int main(){
         }
         bool minus_cycle = false;
         vi dist(N, INF);
+        dist[0] = 0;
+        for(int l = 0; l < N; l++){
+            for(int here = 0; here < N; here++){
+                for(int i = 0; i < adj[here].size(); i++){
+                    int there = adj[here][i].first, d = adj[here][i].second;
+                    if(dist[here] != INF && dist[there] > dist[here] + d){
+                        dist[there] = dist[here] + d;
+                        if(l == N - 1) minus_cycle = true;
+                    }
+                }
+            }
+        }
+        
+        if(minus_cycle) printf("YES\n");
+        else printf("NO\n");
+    }
+}
+
+/*
+
+int main(){
+    freopen("1865.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    int TC, N, M, W;
+    scanf("%d", &TC);
+    while(TC--){
+        scanf("%d %d %d", &N, &M, &W);
+        vector<pii> adj[N];
+        for(int i = 0; i < M; i++){
+            int S, E, T;
+            scanf("%d %d %d", &S, &E, &T);
+            S--; E--;
+            adj[S].push_back(pii(E, T));
+            adj[E].push_back(pii(S, T));            
+        }
+        for(int i = 0; i < W; i++){
+            int S, E, T;
+            scanf("%d %d %d", &S, &E, &T);
+            S--; E--;
+            adj[S].push_back(pii(E, -T));
+            //adj[E].push_back(pii(S, -T));  
+        }
+        bool minus_cycle = false;
+        vi dist(N, INF);
         vb visited(N);
         for(int k = 0; k < N; k++){
             if(visited[k]) continue;
@@ -101,3 +145,4 @@ int main(){
         else printf("NO\n");
     }
 }
+*/

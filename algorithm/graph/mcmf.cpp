@@ -1,3 +1,55 @@
+/*
+    kks227님 코드
+*/
+
+// c[MAX_V][MAX_V] : 각 간선의 용량
+// d[MAX_V][MAX_V] : 각 간선의 비용
+// f[MAX_V][MAX_V] : 각 간선에 흐르는 중인 유량
+
+while(true){
+    vi prev(MAX_V, -1), dist(MAX_V, INF);
+    vb in_q(MAX_V);
+    dist[S] = 0;
+    in_q[S] = true;
+    qi q;
+    q.push(S);
+
+    while(!q.empty()){
+        int here = q.front(); q.pop();
+        in_q[here] = false;
+
+        for(int i = 0; i < adj[here].size(); i++){
+            int there = adj[here][i];
+
+            if(c[here][there] - f[here][there] > 0 
+                && dist[there] > dist[here] + d[here][there]){
+                
+                dist[there] = dist[here] + d[here][there];
+                prev[there] = here;
+                if(!in_q[there]){
+                    q.push(there);
+                    in_q[there] = true;
+                } 
+            }
+        }
+    }
+
+    // 더 이상 경로가 없다면 종료
+    if(prev[T] == -1) break;
+
+    // 경로 상에서 가장 residual이 작은 간선을 찾아 최대 흘릴 수 있는 flow 찾음
+    int flow = INF;
+
+    for(int i = T; i != S; i = prev[i])
+        flow = min(flow, c[prev[i]][i] - f[prev[i]][i]);
+    
+    for(int i = T; i != S; i = prev[i]){
+        result += flow * d[prev[i]][i];
+        f[prev[i]][i] += flow;
+        f[i][prev[i]] -= flow;
+    }
+}
+
 
 /*
     프로그래밍 콘테스트 챌린징
