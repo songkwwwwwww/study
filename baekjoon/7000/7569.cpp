@@ -54,7 +54,7 @@ int N, M, H;
 int m[MAX_H][MAX_N][MAX_M];
 
 struct location{
-    int x, y, h;
+    int h, x, y;
     location(int nh, int nx, int ny):h(nh), x(nx), y(ny) {}
 };
 
@@ -75,24 +75,28 @@ int main(){
         for(int i = 0; i < N; i++)
             for(int j = 0; j < M; j++){
                 scanf("%d", &m[k][i][j]);
-                if(m[k][i][j] == 1)
+                // 처음부터 익은 토마토가 있다면, 큐에 넣는다
+                if(m[k][i][j] == 1) {
                     q.push(location(k, i, j));
+                    flag = true;
+                }
             }
+
     int count = 0;
     while(!q.empty()){
         count++;
         int size = q.size();
-    
+        
         for(int i = 0; i < size; i++){
             int h = q.front().h;
             int x = q.front().x;
             int y = q.front().y;
             q.pop();
-
             for(int j = 0; j < 6; j++){
                 int nh = h + dh[j];
                 int nx = x + dx[j];
                 int ny = y + dy[j];
+                // 옆에 익지 않은 토마토가 있다면, 익게 만든다.
                 if(is_range(nh, nx, ny) && m[nh][nx][ny] == 0){
                     q.push(location(nh, nx, ny));
                     m[nh][nx][ny] = 1;
@@ -103,6 +107,7 @@ int main(){
     for(int k = 0; k < H; k++){
         for(int i = 0; i < N; i++){
             for(int j = 0; j < M; j++){
+                // 아직도 익지 않은 토마토가 있다면, 실패다
                 if(m[k][i][j] == 0){
                     printf("-1\n");
                     return 0;
@@ -110,5 +115,6 @@ int main(){
             }
         }
     }
-    printf("%d\n", count - 1);
+    if(!flag) printf("0\n");
+    else printf("%d\n", count - 1);
 }

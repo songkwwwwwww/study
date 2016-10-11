@@ -44,26 +44,44 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007;
 
 /*
 
 */
 
-const int MAX_N = 8;
 
+const int MAX_N = 100;
+const int MAX_M = 10000000;
+const int MAX_C = 100;
 
-// nCr = n-1Cr + n-1Cr-1;
-int solve(int n, int r){
-
-}
+int N, M;
+int m[MAX_N + 1];
+int c[MAX_N + 1];
+// d[i] : i 원으로 확보할 수 있는 최대 메모리의 수
+int d[MAX_N * MAX_C + 1];
+// 1 <= m_1, ... , m_N <= 1000 0000
+// 0 <= c_1, ... , c_N <= 100
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
-    int TC; scanf("%d", &TC);
-    for(int tc = 1; tc <= TC; tc++){
-        int N, M;        
-        printf("Case #%d\n%d\n", tc, sum);
+    freopen("7579.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    scanf("%d %d", &N, &M);
+    for(int i = 1; i <= N; i++)
+        scanf("%d", &m[i]);
+    for(int i = 1; i <= N; i++)
+        scanf("%d", &c[i]);
+    
+    for(int i = 1; i <= N; i++){
+        for(int j = MAX_N * MAX_C; j >= c[i]; j--){
+            d[j] = max(d[j], d[j - c[i]] + m[i]);
+        }
     }
+    int ans = INF;
+    for(int i = 0; i <= MAX_N * MAX_C; i++){
+        if(d[i] >= M){
+            ans = i;
+            break;
+        }
+    }
+    printf("%d\n", ans);
 }

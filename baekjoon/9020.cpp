@@ -44,26 +44,44 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007;
 
 /*
 
 */
 
-const int MAX_N = 8;
+
+const int MAX_N = 10000;
 
 
-// nCr = n-1Cr + n-1Cr-1;
-int solve(int n, int r){
-
-}
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
+    freopen("9020.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    vb prime(MAX_N + 1, true);
+    prime[0] = prime[1] = false;
+    for(int i = 2; i * i <= MAX_N; i++){
+        if(prime[i]){
+            
+            for(int j = i * i; j <= MAX_N; j += i){
+                prime[j] = false;
+            }
+        }
+    }
     int TC; scanf("%d", &TC);
-    for(int tc = 1; tc <= TC; tc++){
-        int N, M;        
-        printf("Case #%d\n%d\n", tc, sum);
+    while(TC--){
+        int N, a, b;
+        scanf("%d", &N);
+        if(N == 4){
+            a = b = 2;
+        }
+        else{
+            for(int i = 3; 2 * i <= N; i += 2){
+                if(prime[i] && prime[N - i]){
+                    a = i;
+                    b = N - i;
+                }
+            }
+        }
+        printf("%d %d\n", a, b);
     }
 }

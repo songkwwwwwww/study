@@ -44,26 +44,40 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007;
 
 /*
 
 */
 
-const int MAX_N = 8;
+struct val{ 
+    int l, r;
+	bool operator <(const val& rhs) const{
+		return l == rhs.l ? r > rhs.r : l < rhs.l;
+	}
+};
 
+const int MAX_N = 100000;
+const int MAX_VAL = 10000000;
+val a[MAX_N];
 
-// nCr = n-1Cr + n-1Cr-1;
-int solve(int n, int r){
-
-}
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
+    freopen("prob_id_19.txt", "r", stdin);
+    //setbuf(stdout, NULL);
     int TC; scanf("%d", &TC);
     for(int tc = 1; tc <= TC; tc++){
-        int N, M;        
-        printf("Case #%d\n%d\n", tc, sum);
+        int N;
+        scanf("%d", &N);
+        for(int i = 0; i < N; i++){
+            scanf("%d %d", &a[i].l, &a[i].r);
+        }
+        sort(a, a + N);
+        vi d(N, INF);
+        for(int i = 0; i < N; i++){
+            *upper_bound(d.begin(), d.end(), a[N - i - 1].r) = a[N - i - 1].r;
+        }
+        int ans = find(d.begin(), d.end(), INF) - d.begin();
+        if(ans == 0) ans = -1;
+        printf("Case #%d\n%d\n", tc, ans);
     }
 }

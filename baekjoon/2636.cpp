@@ -59,64 +59,57 @@ inline bool is_range(int x, int y){
     return (0 <= x && x < N && 0 <= y && y < M);
 }
 
-bool done(){
+int done(){
     int cnt = 0;
     for(int i = 0; i < N; i++){
         for(int j = 0; j < M; j++){
-            if(a[i][j] == -1 || a[i][j] > 2)
-                a[i][j] = 0;
-            else if(a[i][j] == 1 || a[i][j] == 2){
-                a[i][j] = 1;
+            // 치즈가 남아있는 경우
+            if(a[i][j] == 1){
                 cnt++;
+            }
+            // 치즈가 없어진 경우
+            else if(a[i][j] > 1 || a[i][j] == -1){
+                a[i][j] = 0;
             }
         }
     }
-
-    return cnt == 0;
+    return cnt;
 }
 
 int solve(int x, int y){
     a[x][y] = -1;
+
     for(int i = 0; i < 4; i++){
         int nx = x + dx[i];
         int ny = y + dy[i];
-        if(is_range(nx, ny)){
-            // 비어있으면 간다
+        if(0 <= nx && nx < N && 0 <= ny && ny < M){
+            // 다음 칸이 비어있다면 이동
             if(a[nx][ny] == 0){
                 solve(nx, ny);
             }
-            // 비어있지 않으면
-            else if(a[nx][ny] > 0){
+            // 치즈가 있다면 ++ 한다.
+            // 해당 칸이 >= 2 라면, 치즈가 없어졌다는 뜻이다.
+            else if(a[nx][ny] == 1){
                 a[nx][ny]++;
             }
         }
     }
 }
-/*
-int solve(int x, int y){
-    a[x][y] = -1;
-    for(int i = 0; i < 4; i++){
-        if((x + dx[i] >= 0) && (x + dx[i] < N) && (y + dy[i] >= 0) && (y + dy[i] < M)){
-            if(a[x + dx[i]][y + dy[i]] == 0)
-                solve(x + dx[i], y + dy[i]);
-            else if(a[x + dx[i]][y + dy[i]] > 0)
-                a[x + dx[i]][y + dy[i]]++;
-        }
-    }
-}
-*/
 
 int main(){
-    freopen("2638.txt", "r", stdin);
+    freopen("2636.txt", "r", stdin);
     //setbuf(stdout, NULL);
     scanf("%d %d", &N, &M);
     for(int i = 0; i < N; i++)
         for(int j = 0; j < M; j++)
             scanf("%d", &a[i][j]);
-    
-    int ans = 0;
-    for(ans = 0; !done(); ans++)
+    int ans = 0, count;
+    while(true){
+        int cur = done();
+        if(cur == 0) break;
         solve(0, 0);
-
-    printf("%d\n", ans);
+        count = cur;
+        ans++;
+    }
+    printf("%d\n%d\n", ans, count);
 }
