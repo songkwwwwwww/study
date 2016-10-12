@@ -54,15 +54,16 @@ const int INF = 987654321;
 */
 
 
-const int MAX_N = 8;
-const int MAX_M = 8;
-
-inline bool is_range(int x, int y){
-    return (0 <= x && x < N && 0 <= y && y < N);
-}
+const int MAX_N = 30;
+const int MAX_C = 1000000000;
+int N, C;
+int w[MAX_N];
 
 int main(){
-    freopen(".txt", "r", stdin);
+    freopen("1450.txt", "r", stdin);
     //setbuf(stdout, NULL);
-
+    scanf("%d %d", &N, &C);
+    for(int i = 0; i < N; i++)
+        scanf("%d", &w[i]);
+    
 }

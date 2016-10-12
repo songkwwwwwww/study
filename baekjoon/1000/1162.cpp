@@ -9,6 +9,8 @@
 #include <set>
 
 #include <map>
+//#include <unordered_map> // c++11
+
 #include <utility> // std::pair
 
 #include <functional> // greater, less
@@ -25,25 +27,78 @@ using namespace std;
 
 typedef long long ll;
 
-const int INF = 987654321;
-const int MAX_V = 20000;
+typedef pair<int, int> pii;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
-/*
-입력
-첫 줄에는 도시의 수 N(1 ≤ N ≤ 10,000)과 도로의 수 M(1 ≤ M ≤ 50,000)과 포장할 도로의 수 K(1 ≤ K ≤ 20)가 
-공백으로 구분되어 주어진다. M개의 줄에 대해 도로를 연결짓는 두 도시와 도로를 통과하는데 걸리는 시간이 주어진다. 
-도로들은 양방향 도로이다.
+const ll INF = numeric_limits<ll>::max();
 
-출력
-첫 줄에 K개 이하의 도로를 포장하여 얻을 수 있는 최소 시간을 출력한다.
+/*
+
 */
 
-int V, E, K;
+
+const int MAX_N = 10000;
+const int MAX_M = 50000;
+const int MAX_K = 20;
+int N, M, K;
+// d[i][j] : 도시 개수 i, 포장 가능한 도로의 개수 j
 
 int main(){
     freopen("1162.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    scanf("%d %d %d", &N, &M, &K);
+    vector< vector<pii> > adj; adj.resize(N);
+    for(int u, v, w, i = 0; i < M; i++){
+        scanf("%d %d %d", &u, &v, &w);
+        u--; v--;
+        adj[u].push_back(make_pair(v, w));
+        adj[v].push_back(make_pair(u, w));
+    }
+    int S = 0, T = N - 1;
+    // cost, vertex, count;
+    priority_queue< pair<ll, pair<int, int> > > pq;
+    pq.push(make_pair(0, make_pair(S, K)));
+    vvl dist(N, vl(K + 1, INF));
+    dist[S][K] = 0;
 
+    while(!pq.empty()){
+        int here = pq.top().second.first;
+        ll cost = -pq.top().first;
+        int count = pq.top().second.second;
+        pq.pop();
+
+        for(int i = 0; i < adj[here].size(); i++){
+            int there = adj[here][i].first;
+            ll next_cost = cost + adj[here][i].second;
+
+            if(count > 0 && cost < dist[there][count - 1]){
+                dist[there][count - 1] = cost;
+                pq.push(make_pair(-cost, make_pair(there, count - 1)));
+            }
+
+            if(next_cost < dist[there][count]){
+                dist[there][count] = next_cost;
+                pq.push(make_pair(-next_cost, make_pair(there, count)));
+            }
+        }
+    }
+    
+    ll ans = numeric_limits<ll>::max();
+    for(int i = 0; i <= K; i++){
+        ans = min(ans, dist[T][i]);
+    }
+    printf("%lld\n", ans);
 }

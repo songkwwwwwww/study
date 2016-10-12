@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,10 +27,18 @@ using namespace std;
 
 typedef long long ll;
 
-typedef vector<int> VI;
-typedef vector<VI> VVI;
+typedef pair<int, int> pii;
 
-typedef queue<int> QI;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+
+typedef queue<int> qi;
 
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
@@ -42,8 +50,56 @@ const int INF = 987654321;
 */
 const int MAX_N = 1000;
 const int MAX_M = 1000;
-
 int N, M;
+vvi adj;
+vi a_match, b_match;
+vb visited;
+
+int dfs(int a){
+    if(visited[a]) return false;
+    visited[a] = true;
+
+    for(int i = 0; i < adj[a].size(); i++){
+        int b = adj[a][i];
+
+        if(b_match[b] == -1 || dfs(b_match[b])){
+            a_match[a] = b;
+            b_match[b] = a;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main(){
+    freopen("9576.txt", "r", stdin);
+    int TC; scanf("%d", &TC);
+    while(TC--){
+        scanf("%d %d", &N, &M);
+        adj.resize(M);
+        for(int i = 0; i < M; i++){
+            int a, b;
+            scanf("%d %d", &a, &b);
+            for(int j = a; j <= b; j++){
+                adj[i].push_back(j - 1);
+            }
+        }
+        int size = 0;
+        a_match = vi(M, -1);
+        b_match = vi(N, -1);
+        for(int start = 0; start < M; start++){
+            visited = vb(M);
+            if(dfs(start))
+                size++;
+        }
+        printf("%d\n", size);
+        for(int i = 0; i < M; i++)
+            adj[i].clear();
+    }
+}
+
+/*
 
 // adj[i][j] A_i 와 B_i가 연결되어 있는가?
 bool adj[MAX_N][MAX_M];
@@ -102,6 +158,7 @@ int main(){
         memset(adj, 0, sizeof(adj));
     }
 }
+*/
 
 
 /*
