@@ -28,9 +28,13 @@ using namespace std;
 typedef long long ll;
 
 typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
 
 typedef vector<int> vi;
 typedef vector<vi> vvi;
+
+typedef vector<double> vd;
+typedef vector<vd> vvd;
 
 typedef vector<long long> vl;
 typedef vector<vl> vvl;
@@ -44,19 +48,16 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007LL;
-
+const ll MOD = 1000000007LL;
 /*
 
 */
 
-const int MAX_N = 1000000;
-const int MAX_M = MAX_N;
-int N, M;
+const int MAX_N = 4000000;
+const int MAX_K = MAX_N;
+int N, K;
 
-ll factorials[MAX_N + MAX_M + 3];
-
-ll pow_m(ll a, ll b){
+ll pow(ll a, ll b){
     ll ret = 1;
     while(b){
         if(b & 1)
@@ -68,20 +69,16 @@ ll pow_m(ll a, ll b){
 }
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
-    factorials[1] = 1;
-    for(int i = 2; i <= MAX_N + MAX_M + 2; i++)
-        factorials[i] = (factorials[i - 1] * i) % MOD;
-    
-    int TC; scanf("%d", &TC);
-    for(int tc = 1; tc <= TC; tc++){
-        scanf("%d %d", &N, &M);
-        ll A = factorials[N + M + 2];
-        ll B = (factorials[N + 1] * factorials[M + 1]) % MOD;
-        
-        ll ans = ((A * pow_m(B, MOD - 2)) % MOD) - 1;
-
-        printf("Case #%d\n%lld\n", tc, ans);
+    freopen("11401.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    scanf("%d %d", &N, &K);
+    // A : N! / (N - K)!, B: K!
+    ll A = 1, B = 1;
+    for(int i = 1; i <= K; i++){
+        A = (A * (N - i + 1)) % MOD;
+        B = (B * i) % MOD;
     }
+    // A*B^(P-2) = A/B (mod P)
+    ll ans = (A * pow(B , MOD - 2)) % MOD;
+    printf("%lld\n", ans);
 }

@@ -28,9 +28,13 @@ using namespace std;
 typedef long long ll;
 
 typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
 
 typedef vector<int> vi;
 typedef vector<vi> vvi;
+
+typedef vector<double> vd;
+typedef vector<vd> vvd;
 
 typedef vector<long long> vl;
 typedef vector<vl> vvl;
@@ -44,44 +48,33 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007LL;
 
 /*
 
 */
 
-const int MAX_N = 1000000;
-const int MAX_M = MAX_N;
-int N, M;
 
-ll factorials[MAX_N + MAX_M + 3];
+const int MAX_N = 100000;
+const int MAX_R = 1000000000;
+const int MAX_L = MAX_R;
+int N, R, L;
+int a[MAX_N + 1];
 
-ll pow_m(ll a, ll b){
-    ll ret = 1;
-    while(b){
-        if(b & 1)
-            ret = (ret * a) % MOD;
-        a = (a * a) % MOD;
-        b >>= 1;
-    }
-    return ret;
+inline bool is_range(int x, int y){
+    return (0 <= x && x < N && 0 <= y && y < N);
 }
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
-    factorials[1] = 1;
-    for(int i = 2; i <= MAX_N + MAX_M + 2; i++)
-        factorials[i] = (factorials[i - 1] * i) % MOD;
-    
+    freopen("prob_id_21.txt", "r", stdin);
+    //setbuf(stdout, NULL);
     int TC; scanf("%d", &TC);
     for(int tc = 1; tc <= TC; tc++){
-        scanf("%d %d", &N, &M);
-        ll A = factorials[N + M + 2];
-        ll B = (factorials[N + 1] * factorials[M + 1]) % MOD;
+        scanf("%d %d %d", &N, &R, &L);
+        for(int i = 0; i < N; i++)
+            scanf("%d", &a[i]);
         
-        ll ans = ((A * pow_m(B, MOD - 2)) % MOD) - 1;
+        
 
-        printf("Case #%d\n%lld\n", tc, ans);
+        printf("Case #%d\n", tc);
     }
 }

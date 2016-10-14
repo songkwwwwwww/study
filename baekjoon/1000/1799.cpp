@@ -43,11 +43,11 @@ const int dy[2] = {-1, 1}; // ;
 
 // 체스판의 정보
 int board_size;
-int board[MAX_N][MAX_N];
+int board[MAX_N + 3][MAX_N + 3];
 
-int id[2][MAX_N][MAX_N];
+int id[2][MAX_N + 3][MAX_N + 3];
 
-bool adj[MAX_N][MAX_N];
+bool adj[MAX_N + 3][MAX_N + 3];
 
 int n, m;
 

@@ -28,9 +28,13 @@ using namespace std;
 typedef long long ll;
 
 typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
 
 typedef vector<int> vi;
 typedef vector<vi> vvi;
+
+typedef vector<double> vd;
+typedef vector<vd> vvd;
 
 typedef vector<long long> vl;
 typedef vector<vl> vvl;
@@ -44,44 +48,48 @@ const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
 const int INF = 987654321;
-const int MOD = 1000000007LL;
 
 /*
 
 */
 
-const int MAX_N = 1000000;
-const int MAX_M = MAX_N;
-int N, M;
 
-ll factorials[MAX_N + MAX_M + 3];
+const int MAX_N = 1000;
+int N;
+int a[MAX_N + 3][MAX_N + 3];
+bool c[MAX_N + 3][MAX_N + 3];
+int d[MAX_N + 3][MAX_N + 3];
 
-ll pow_m(ll a, ll b){
-    ll ret = 1;
-    while(b){
-        if(b & 1)
-            ret = (ret * a) % MOD;
-        a = (a * a) % MOD;
-        b >>= 1;
+
+int solve(int x, int y){
+    // base case
+    if(x == N + 1) return 0;
+
+    int& ret = d[x][y];
+    if(c[x][y]) return ret;
+    c[x][y] = true;
+
+    // 현재 공을 고르거나 고르지 않는 경우
+    ret = max(0, a[x][y]);
+
+    for(int i = 0; i <= 1; i++){
+        ret = max(ret, solve(x + 1, y + i) + a[x][y]);
     }
+
     return ret;
 }
 
 int main(){
-    freopen("prob_id_5.txt", "r", stdin);
-    setbuf(stdout, NULL);
-    factorials[1] = 1;
-    for(int i = 2; i <= MAX_N + MAX_M + 2; i++)
-        factorials[i] = (factorials[i - 1] * i) % MOD;
-    
-    int TC; scanf("%d", &TC);
-    for(int tc = 1; tc <= TC; tc++){
-        scanf("%d %d", &N, &M);
-        ll A = factorials[N + M + 2];
-        ll B = (factorials[N + 1] * factorials[M + 1]) % MOD;
+    freopen("5681.txt", "r", stdin);
+    //setbuf(stdout, NULL);
+    while(scanf("%d", &N) != EOF && N){
+        for(int i = 1; i <= N; i++)
+            for(int j = 1; j <= i; j++)
+                scanf("%d", &a[i][j]);
         
-        ll ans = ((A * pow_m(B, MOD - 2)) % MOD) - 1;
-
-        printf("Case #%d\n%lld\n", tc, ans);
+        int ans = max(0, solve(1, 1));
+        printf("%d\n", ans);
+        memset(c, false, sizeof(c));        
+        memset(d, 0, sizeof(d));
     }
 }
