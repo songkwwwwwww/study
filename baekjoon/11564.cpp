@@ -54,28 +54,23 @@ const int INF = 987654321;
 */
 
 
-const int MAX_LEN = 1000;
 
 int main(){
-    freopen("11565.txt", "r", stdin);
+    freopen("11564.txt", "r", stdin);
     //setbuf(stdout, NULL);
-    char a[MAX_LEN + 1];
-    char b[MAX_LEN + 1];
-    int a_cnt = 0;
-    scanf("%s", a);
-    for(int i = 0; a[i]; i++)
-        if(a[i] == '1')
-            a_cnt++;
-    
-    int b_cnt = 0;
-    scanf("%s", b);
-    for(int i = 0; b[i]; i++)
-        if(b[i] == '1')
-            b_cnt++;
-    
-    if(a_cnt & 1) a_cnt++;
-    if(a_cnt >= b_cnt)
-        printf("VICTORY\n");
-    else
-        printf("DEFEAT\n");
+    ll k, a, b;
+    scanf("%lld %lld %lld", &k, &a, &b);
+    ll ans;
+    if(0 < a){
+        ans = (b / k - (a - 1) / k );
+    }
+    else if(b < 0){
+        ans = (abs(a) / k - (abs(b) - 1) / k );
+    }
+    else{
+        ans = abs(b) / k;
+        ans += abs(a) / k;
+        ans++;
+    }
+    printf("%lld\n", ans);
 }

@@ -54,28 +54,46 @@ const int INF = 987654321;
 */
 
 
-const int MAX_LEN = 1000;
+const int MAX_N = 8;
+const int MAX_M = 8;
+
 
 int main(){
-    freopen("11565.txt", "r", stdin);
+    freopen("11566.txt", "r", stdin);
     //setbuf(stdout, NULL);
-    char a[MAX_LEN + 1];
-    char b[MAX_LEN + 1];
-    int a_cnt = 0;
-    scanf("%s", a);
-    for(int i = 0; a[i]; i++)
-        if(a[i] == '1')
-            a_cnt++;
+    int N, M;
+    scanf("%d", &N);
+    vi a; a.resize(N);
+    for(int i = 0; i < N; i++)
+        scanf("%d", &a[i]);
+    scanf("%d", &M);
+    vi b; b.resize(M);
+    for(int i = 0; i < M; i++)
+        scanf("%d", &b[i]);
     
-    int b_cnt = 0;
-    scanf("%s", b);
-    for(int i = 0; b[i]; i++)
-        if(b[i] == '1')
-            b_cnt++;
-    
-    if(a_cnt & 1) a_cnt++;
-    if(a_cnt >= b_cnt)
-        printf("VICTORY\n");
-    else
-        printf("DEFEAT\n");
-}
+    int depth = 0;
+    vi ans; ans.reserve( (M - N) / (N - 1) + 1);
+    while((N - 1) * depth + N <= M){
+        for(int i = 0; i + (N - 1) * depth + N <= M; i++){
+            bool flag = true;
+            for(int j = 0, k = 0; j < N; j++, k++){
+                if(a[j] != b[i + k]){
+                    flag = false;
+                    break;
+                }
+                k += depth;
+            }
+            if(flag){
+                ans.push_back(depth);
+                break;
+            }
+        }
+        depth++;
+    }
+    if(ans.size() == 0){
+        printf("-1\n");
+    }
+    else{
+        printf("%d %d\n", ans[0], ans[ans.size() - 1]);
+    }
+}   

@@ -54,28 +54,54 @@ const int INF = 987654321;
 */
 
 
-const int MAX_LEN = 1000;
+const int MAX_N = 500;
+const int MAX_M = 500;
+int N, M;
+char m[MAX_N][MAX_M + 1];
+int s_x, s_y, e_x, e_y;
+
+
+inline bool is_range(int x, int y){
+    return (0 <= x && x < N && 0 <= y && y < M);
+}
+
+bool dfs(int x, int y){
+    // base case
+    if(x == e_x && y == e_y && m[x][y] == 'X')
+        return true;
+    m[x][y] = 'X';
+    
+
+
+    for(int i = 0; i < 4; i++){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if(is_range(nx, ny)) {
+            if(m[nx][ny] == 'X'){
+                if(nx == e_x && ny == e_y && dfs(nx, ny))
+                    return true;
+            }
+            else{ // m[nx][ny] == '.'
+                if(dfs(nx, ny))
+                    return true;
+            }
+        }
+    }
+    return false;
+}
 
 int main(){
-    freopen("11565.txt", "r", stdin);
+    freopen("11567.txt", "r", stdin);
     //setbuf(stdout, NULL);
-    char a[MAX_LEN + 1];
-    char b[MAX_LEN + 1];
-    int a_cnt = 0;
-    scanf("%s", a);
-    for(int i = 0; a[i]; i++)
-        if(a[i] == '1')
-            a_cnt++;
+    scanf("%d %d", &N, &M);
+    for(int i = 0; i < N; i++)
+        scanf("%s", m[i]);
     
-    int b_cnt = 0;
-    scanf("%s", b);
-    for(int i = 0; b[i]; i++)
-        if(b[i] == '1')
-            b_cnt++;
+    scanf("%d %d %d %d", &s_x, &s_y, &e_x, &e_y);
+    s_x--; s_y--; e_x--; e_y--;
     
-    if(a_cnt & 1) a_cnt++;
-    if(a_cnt >= b_cnt)
-        printf("VICTORY\n");
+    if((s_x == e_x && s_y == e_y) || !dfs(s_x, s_y))
+        printf("NO\n");
     else
-        printf("DEFEAT\n");
+        printf("YES\n");
 }
