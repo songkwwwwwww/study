@@ -9,8 +9,11 @@
 #include <set>
 
 #include <map>
+//#include <unordered_map> // c++11
+
 #include <utility> // std::pair
 
+#include <functional> // greater, less
 #include <limits> // std::numeric_limits<double>::max()
 
 #include <cstdio>
@@ -24,55 +27,58 @@ using namespace std;
 
 typedef long long ll;
 
+typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+typedef vector<double> vd;
+typedef vector<vd> vvd;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+
+typedef queue<int> qi;
+
+const int dx[4] = {0, 0, 1, -1}; // E W S N;
+const int dy[4] = {1, -1, 0, 0}; // E W S N;
+
+const int INF = 987654321;
+
 /*
 
 */
-char S[1002];
-int d[1001][1001];
-int main(){
-    freopen("1254.txt", "r", stdin);
-    scanf("%s", S + 1);
-    int n;
-    for(n = 0; S[n + 1]; n++);
 
-    for(int t = 2; t <= n; t++){
-        for(int i = 1, j = t; j <= n; i++, j++){
-            if(S[i] == S[j])
-                d[i][j] = d[i+1][j-1];
-            else // S[i] != S[j]
-                d[i][j] = 1 + MIN(d[i+1][j], d[i][j-1]);
-        }
+
+const int MAX_L = 1000;
+
+bool is_pal(string s){
+    int N = s.size();
+    for(int i = 0; i <= (N - 1) / 2; i++){
+        // i와 N - 1 - i를 비교
+        if(s[N - 1 - i] == '@')
+            continue;
+        if(s[i] != s[N - 1 - i])
+            return false;
     }
-    printf("%d\n", n + d[1][n]);
+    return true;
 }
 
-/*
-char S[1002];
-char rS[1002];
-int d[1001][1001];
 int main(){
     freopen("1254.txt", "r", stdin);
-    scanf("%s", S);
-    int len = 0;
-    //printf("%d\n", n + d[1][n]);
-    for(len = 0; S[len]; len++);
-    for(int i = 1; i <= len; i++)
-        rS[i-1] = S[len - i];
-    rS[len] = '\0';
-    
-    for(int i = 1; i <= len; i++){
-        for(int j = 1; j <= len; j++){
-            if(S[i - 1] == rS[j - 1]){
-                d[i][j] = d[i - 1][j - 1] + 1;
-            }
-            else{
-                d[i][j] = MAX(d[i-1][j], d[i][j - 1]);
-            }
+    //setbuf(stdout, NULL);
+    string str;
+    cin >> str;
+    while(true){
+        if(is_pal(str)){
+            break;
         }
+        str += '@';
     }
-    int lcs =  d[len][len];
-
-    //printf("%d\n", d[len][len]);
-    printf("%d\n", 2 * len - lcs);
+    int ans = str.size();
+    printf("%d\n", ans);
 }
-*/

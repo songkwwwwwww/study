@@ -54,32 +54,40 @@ const int INF = 987654321;
 */
 
 
-const int MAX_N = 15;
-const int MAX_M = 15;
-const int MAX_K = MAX_N * MAX_M;
-int N, M, K;
-int d[MAX_N + 1][MAX_M + 1];
+const int MAX_L = 100000;
 
-inline bool is_range(int x, int y){
-    return (0 <= x && x < N && 0 <= y && y < M);
+int solve(string& A, string& B){
+    int N = A.size();
+    int M = B.size();
+    if(N != M)
+        return -1;
+    vi a, b; 
+    a.reserve(N);
+    b.reserve(N);
+    for(int i = 0; i < N; i++){
+        if(A[i] == 'a')
+            a.push_back(i);
+        if(B[i] == 'a')
+            b.push_back(i);
+    }
+    if(a.size() != b.size())
+        return -1;
+            
+    int ans = 0;
+    for(int i = 0; i < a.size(); i++){
+        ans += abs(b[i] - a[i]);
+    }
+            
+    return ans;
 }
 
 int main(){
-    freopen("10164.txt", "r", stdin);
+    freopen("10453.txt", "r", stdin);
     //setbuf(stdout, NULL);
-    scanf("%d %d %d", &N, &M, &K);
-    d[0][1] = 1;
-    for(int i = 1; i <= N; i++){
-        for(int j = 1; j <= M; j++){
-            d[i][j] = d[i - 1][j] + d[i][j - 1];
-        }
-    }
-    if(K){
-        int x = (K - 1) / M + 1;
-        int y = (K - 1) % M + 1;
-        printf("%d\n", d[x][y] * d[N - x + 1][M - y + 1]);
-    }
-    else{
-        printf("%d\n", d[N][M]);
+    int TC; scanf("%d", &TC);
+    while(TC--){        
+        string A, B;
+        cin >> A >> B;
+        printf("%d\n", solve(A, B));
     }
 }
