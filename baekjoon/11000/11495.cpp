@@ -50,10 +50,10 @@ const int INF = 987654321;
 
 const int MAX_N = 50;
 const int MAX_M = 50;
-const int MAX_V = MAX_N * MAX_N+2;
+const int MAX_V = MAX_N * MAX_M + 2;
 
 int N, M;
-int m[50][50];
+int m[MAX_N + 3][MAX_M + 3];
 
 
 inline bool is_range(int x, int y){
@@ -69,30 +69,34 @@ int main(){
     while(TC--){
         scanf("%d %d", &N, &M);
         int V = N * M + 2;
-        int total_value = 0;
-        vvi m(N, vi(M));
-        vi adj[V];
-        int c[V][V] = {0}, f[V][V] = {0};
-        
-
-        for(int i = 0; i < N; i++)
-            for(int j = 0; j < M; j++){
-                scanf("%d", &m[i][j]);
-                total_value += m[i][j];
-            }
-        
         int S = V - 2, T = V - 1;
+        vvi adj; adj.resize(V);
+        vvi c(V, vi(V)), f(V, vi(V));
+
+        int total_sum = 0;
+        for(int x = 0; x < N; x++){
+            for(int y = 0; y < M; y++){
+                scanf("%d", &m[x][y]);
+                total_sum += m[x][y];
+            }
+        }
+
         for(int x = 0; x < N; x++){
             for(int y = 0; y < M; y++){
                 int here = x * M + y;
-                if((x + y) % 2 == 0){
+                if( (x + y) % 2 != 0 ){
+                    c[here][T] = m[x][y];
+                    adj[here].push_back(T);
+                    adj[T].push_back(here);
+                }
+                else{
                     c[S][here] = m[x][y];
                     adj[S].push_back(here);
                     adj[here].push_back(S);
-                    
-                    for(int nx, ny, d = 0; d < 4; d++){
-                        nx = x + dx[d];
-                        ny = y + dy[d];
+
+                    for(int i = 0; i < 4; i++){
+                        int nx = x + dx[i];
+                        int ny = y + dy[i];
                         int there = nx * M + ny;
                         if(is_range(nx, ny)){
                             c[here][there] = INF;
@@ -101,20 +105,14 @@ int main(){
                         }
                     }
                 }
-                else{
-                    c[here][T] = m[x][y];
-                    adj[here].push_back(T);
-                    adj[T].push_back(here);
-                }
             }
         }
-        
         int total_flow = 0;
         while(true){
             qi q;
             q.push(S);
             vi prev(V, -1);
-            
+
             while(!q.empty()){
                 int here = q.front(); q.pop();
 
@@ -124,24 +122,22 @@ int main(){
                     if(c[here][there] - f[here][there] > 0 && prev[there] == -1){
                         q.push(there);
                         prev[there] = here;
-                        if(there == T)
-                            break;
                     }
                 }
             }
 
             if(prev[T] == -1) break;
-
+                
             int flow = INF;
             for(int i = T; i != S; i = prev[i])
                 flow = min(flow, c[prev[i]][i] - f[prev[i]][i]);
-            
+                
             for(int i = T; i != S; i = prev[i]){
                 f[prev[i]][i] += flow;
                 f[i][prev[i]] -= flow;
             }
             total_flow += flow;
         }
-        printf("%d\n", total_value - total_flow);
-    }
+        printf("%d\n", total_sum - total_flow);
+    } // end of TC
 }
