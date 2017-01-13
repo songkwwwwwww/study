@@ -1,0 +1,64 @@
+
+;; Function printf (printf, funcdef_no=15, decl_uid=760, cgraph_uid=15, symbol_order=15)
+
+printf (const char * restrict __fmt)
+{
+  int D.2496;
+
+  <bb 2>:
+  D.2496 = __printf_chk (1, __fmt, __builtin_va_arg_pack ());
+  return D.2496;
+
+}
+
+
+
+;; Function main (main, funcdef_no=23, decl_uid=2480, cgraph_uid=23, symbol_order=23)
+
+main ()
+{
+  int k;
+  int j;
+  int i;
+  int D.2494;
+  unsigned int D.2490;
+  unsigned int i.0;
+
+  <bb 2>:
+  j = 0;
+  k = 0;
+  i = 0;
+  goto <bb 7>;
+
+  <bb 3>:
+  i.0 = (unsigned int) i;
+  D.2490 = i.0 & 1;
+  if (D.2490 != 0)
+    goto <bb 4>;
+  else
+    goto <bb 5>;
+
+  <bb 4>:
+  j = j + 1;
+  goto <bb 6>;
+
+  <bb 5>:
+  k = k + 1;
+
+  <bb 6>:
+  printf ("j = %d, k = %d\n", j, k);
+  i = i + 1;
+
+  <bb 7>:
+  if (i <= 9)
+    goto <bb 3>;
+  else
+    goto <bb 8>;
+
+  <bb 8>:
+  D.2494 = 0;
+  return D.2494;
+
+}
+
+

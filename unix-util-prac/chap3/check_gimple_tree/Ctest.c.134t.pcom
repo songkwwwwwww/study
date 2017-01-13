@@ -1,0 +1,54 @@
+
+;; Function main (main, funcdef_no=23, decl_uid=2480, cgraph_uid=23, symbol_order=23) (executed once)
+
+main ()
+{
+  int k;
+  int j;
+  int i;
+  unsigned int ivtmp_5;
+  unsigned int i.0_8;
+  unsigned int _9;
+  unsigned int ivtmp_14;
+
+  <bb 2>:
+
+  <bb 3>:
+  # i_18 = PHI <i_13(7), 0(2)>
+  # j_19 = PHI <j_2(7), 0(2)>
+  # k_20 = PHI <k_4(7), 0(2)>
+  # ivtmp_5 = PHI <ivtmp_14(7), 10(2)>
+  i.0_8 = (unsigned int) i_18;
+  _9 = i.0_8 & 1;
+  if (_9 != 0)
+    goto <bb 4>;
+  else
+    goto <bb 5>;
+
+  <bb 4>:
+  j_10 = j_19 + 1;
+  goto <bb 6>;
+
+  <bb 5>:
+  k_11 = k_20 + 1;
+
+  <bb 6>:
+  # j_2 = PHI <j_10(4), j_19(5)>
+  # k_4 = PHI <k_20(4), k_11(5)>
+  __printf_chk (1, "j = %d, k = %d\n", j_2, k_4);
+  i_13 = i_18 + 1;
+  ivtmp_14 = ivtmp_5 - 1;
+  if (ivtmp_14 != 0)
+    goto <bb 7>;
+  else
+    goto <bb 8>;
+
+  <bb 7>:
+  goto <bb 3>;
+
+  <bb 8>:
+  return 0;
+
+}
+
+

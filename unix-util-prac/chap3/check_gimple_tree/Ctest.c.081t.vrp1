@@ -1,0 +1,133 @@
+
+;; Function main (main, funcdef_no=23, decl_uid=2480, cgraph_uid=23, symbol_order=23) (executed once)
+
+;; 2 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4 5 6 7 8
+;;
+;; Loop 1
+;;  header 7, latch 6
+;;  depth 1, outer 0
+;;  nodes: 7 6 4 5 3
+;; 2 succs { 7 }
+;; 3 succs { 4 5 }
+;; 4 succs { 6 }
+;; 5 succs { 6 }
+;; 6 succs { 7 }
+;; 7 succs { 3 8 }
+;; 8 succs { 1 }
+Adding assert for i_1 from (unsigned int) i_1 + 4294967295
+Adding assert for i_1 from (unsigned int) i_1
+
+SSA replacement table
+N_i -> { O_1 ... O_j } means that N_i replaces O_1, ..., O_j
+
+i_14 -> { i_1 }
+i_15 -> { i_1 }
+i_16 -> { i_1 }
+i_17 -> { i_1 }
+Incremental SSA update started at block: 7
+Number of blocks in CFG: 9
+Number of blocks to update: 5 ( 56%)
+
+
+
+Value ranges after VRP:
+
+i_1: [0, 10]
+j_2: [0, +INF]
+j_3: [0, +INF]
+k_4: [0, +INF]
+k_5: [0, +INF]
+.MEM_6: VARYING
+i.0_8: [0, 9]
+_9: [0, 1]
+j_10: [1, +INF(OVF)]
+k_11: [1, +INF(OVF)]
+i_13: [1, 10]
+i_14: [1, 9]  EQUIVALENCES: { i_1 i_17 } (2 elements)
+i_15: [1, 9]  EQUIVALENCES: { i_1 i_14 i_17 } (3 elements)
+i_16: [0, 9]  EQUIVALENCES: { i_1 i_17 } (2 elements)
+i_17: [0, 9]  EQUIVALENCES: { i_1 } (1 elements)
+
+
+Simplified relational if (i_1 <= 9)
+ into if (i_1 != 10)
+
+Removing basic block 3
+
+SSA replacement table
+N_i -> { O_1 ... O_j } means that N_i replaces O_1, ..., O_j
+
+k_14 -> { k_5 }
+j_15 -> { j_3 }
+i_16 -> { i_1 }
+.MEM_17 -> { .MEM_6 }
+i_18 -> { i_1 }
+j_19 -> { j_3 }
+k_20 -> { k_5 }
+.MEM_21 -> { .MEM_6 }
+Incremental SSA update started at block: 9
+Number of blocks in CFG: 10
+Number of blocks to update: 7 ( 70%)
+
+
+main ()
+{
+  int k;
+  int j;
+  int i;
+  unsigned int i.0_8;
+  unsigned int _9;
+
+  <bb 2>:
+  goto <bb 9>;
+
+  <bb 3>:
+  # i_18 = PHI <i_1(7), i_16(9)>
+  # j_19 = PHI <j_3(7), j_15(9)>
+  # k_20 = PHI <k_5(7), k_14(9)>
+  i.0_8 = (unsigned int) i_18;
+  _9 = i.0_8 & 1;
+  if (_9 != 0)
+    goto <bb 4>;
+  else
+    goto <bb 5>;
+
+  <bb 4>:
+  j_10 = j_19 + 1;
+  goto <bb 6>;
+
+  <bb 5>:
+  k_11 = k_20 + 1;
+
+  <bb 6>:
+  # j_2 = PHI <j_10(4), j_19(5)>
+  # k_4 = PHI <k_20(4), k_11(5)>
+  __printf_chk (1, "j = %d, k = %d\n", j_2, k_4);
+  i_13 = i_18 + 1;
+
+  <bb 7>:
+  # i_1 = PHI <i_13(6)>
+  # j_3 = PHI <j_2(6)>
+  # k_5 = PHI <k_4(6)>
+  if (i_1 != 10)
+    goto <bb 3>;
+  else
+    goto <bb 8>;
+
+  <bb 8>:
+  return 0;
+
+  <bb 9>:
+  # i_16 = PHI <0(2)>
+  # j_15 = PHI <0(2)>
+  # k_14 = PHI <0(2)>
+  goto <bb 3>;
+
+}
+
+
