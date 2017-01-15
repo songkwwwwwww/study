@@ -1,0 +1,126 @@
+
+;; Function main (main, funcdef_no=0, decl_uid=2283, cgraph_uid=0, symbol_order=0)
+
+starting the processing of deferred insns
+ending the processing of deferred insns
+
+
+main
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 19 [fpcr] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 29 [mm0] 30 [mm1] 31 [mm2] 32 [mm3] 33 [mm4] 34 [mm5] 35 [mm6] 36 [mm7] 37 [r8] 38 [r9] 39 [r10] 40 [r11] 45 [xmm8] 46 [xmm9] 47 [xmm10] 48 [xmm11] 49 [xmm12] 50 [xmm13] 51 [xmm14] 52 [xmm15] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 [] 76 [] 77 [] 78 [] 79 [] 80 []
+;;  hardware regs used 	
+;;  regular block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 20 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 16 [argp] 20 [frame] 21 [xmm0] 22 [xmm1] 23 [xmm2] 24 [xmm3] 25 [xmm4] 26 [xmm5] 27 [xmm6] 28 [xmm7] 37 [r8] 38 [r9]
+;;  exit block uses 	 0 [ax] 6 [bp] 7 [sp] 20 [frame]
+;;  regs ever live 	 0[ax] 5[di] 7[sp] 17[flags]
+;;  ref usage 	r0={5d,2u} r1={4d} r2={4d} r4={4d} r5={6d,2u} r6={1d,4u} r7={1d,7u} r8={3d} r9={3d} r10={3d} r11={3d} r12={3d} r13={3d} r14={3d} r15={3d} r16={1d,3u} r17={6d,1u} r18={3d} r19={3d} r20={1d,7u} r21={4d} r22={4d} r23={4d} r24={4d} r25={4d} r26={4d} r27={4d} r28={4d} r29={3d} r30={3d} r31={3d} r32={3d} r33={3d} r34={3d} r35={3d} r36={3d} r37={4d} r38={4d} r39={3d} r40={3d} r45={3d} r46={3d} r47={3d} r48={3d} r49={3d} r50={3d} r51={3d} r52={3d} r53={3d} r54={3d} r55={3d} r56={3d} r57={3d} r58={3d} r59={3d} r60={3d} r61={3d} r62={3d} r63={3d} r64={3d} r65={3d} r66={3d} r67={3d} r68={3d} r69={3d} r70={3d} r71={3d} r72={3d} r73={3d} r74={3d} r75={3d} r76={3d} r77={3d} r78={3d} r79={3d} r80={3d} r87={1d,1u} r88={1d,1u} r89={1d,2u} 
+;;    total ref usage 274{244d,30u,0e} in 15{12 regular + 3 call} insns.
+(note 1 0 4 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 3, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       ENTRY (FALLTHRU)
+;; bb 2 artificial_defs: { }
+;; bb 2 artificial_uses: { u-1(6){ }u-1(7){ }u-1(16){ }u-1(20){ }}
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 4 3 2 NOTE_INSN_FUNCTION_BEG)
+(insn 3 2 6 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                        (const_int -8 [0xfffffffffffffff8])) [0 D.2292+0 S8 A64])
+                (unspec:DI [
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_SET))
+            (set (scratch:DI)
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) test.c:5 986 {stack_tls_protect_set_di}
+     (nil))
+(insn 6 3 7 2 (set (reg:DI 5 di)
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f992bd56ea0 *.LC0>)) test.c:7 89 {*movdi_internal}
+     (nil))
+(call_insn 7 6 8 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f992bcab360 __builtin_puts>) [0 __builtin_puts S1 A8])
+            (const_int 0 [0]))) test.c:7 669 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 8 7 9 2 (set (reg:SI 5 di)
+        (const_int 99 [0x63])) test.c:8 90 {*movsi_internal}
+     (nil))
+(call_insn 9 8 10 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("putchar") [flags 0x41]  <function_decl 0x7f992bcab000 __builtin_putchar>) [0 __builtin_putchar S1 A8])
+            (const_int 0 [0]))) test.c:8 669 {*call_value}
+     (nil)
+    (expr_list:SI (use (reg:SI 5 di))
+        (nil)))
+(insn 10 9 11 2 (parallel [
+            (set (reg:DI 89)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -32 [0xffffffffffffffe0])))
+            (clobber (reg:CC 17 flags))
+        ]) test.c:9 218 {*adddi_1}
+     (nil))
+(insn 11 10 12 2 (set (mem/c:SI (reg:DI 89) [0 MEM[(void *)&buffer]+0 S4 A64])
+        (const_int 1953719668 [0x74736574])) test.c:9 90 {*movsi_internal}
+     (nil))
+(insn 12 11 13 2 (set (mem/c:QI (plus:DI (reg:DI 89)
+                (const_int 4 [0x4])) [0 MEM[(void *)&buffer]+4 S1 A32])
+        (const_int 0 [0])) test.c:9 93 {*movqi_internal}
+     (nil))
+(insn 13 12 16 2 (set (reg:SI 87 [ D.2291 ])
+        (const_int 0 [0])) test.c:11 90 {*movsi_internal}
+     (nil))
+(insn 16 13 20 2 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ D.2291 ])) 90 {*movsi_internal}
+     (nil))
+(insn 20 16 21 2 (set (reg/i:SI 0 ax)
+        (reg:SI 88 [ <retval> ])) test.c:12 90 {*movsi_internal}
+     (nil))
+(insn 21 20 22 2 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                                (const_int -8 [0xfffffffffffffff8])) [0 D.2292+0 S8 A64])
+                        (const_int 40 [0x28])
+                    ] UNSPEC_SP_TLS_TEST))
+            (clobber (scratch:DI))
+        ]) test.c:12 990 {stack_tls_protect_test_di}
+     (nil))
+(jump_insn 22 21 28 2 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 25)
+            (pc))) test.c:12 612 {*jcc_1}
+     (nil)
+ -> 25)
+;;  succ:       4
+;;              3 (FALLTHRU)
+
+;; basic block 3, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 2, next block 4, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       2 (FALLTHRU)
+;; bb 3 artificial_defs: { }
+;; bb 3 artificial_uses: { u-1(6){ }u-1(7){ }u-1(16){ }u-1(20){ }}
+(note 28 22 23 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(call_insn 23 28 24 3 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7f992bda2ca8 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) test.c:12 660 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+;;  succ:      
+
+(barrier 24 23 25)
+;; basic block 4, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 3, next block 1, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       2
+;; bb 4 artificial_defs: { }
+;; bb 4 artificial_uses: { u-1(6){ }u-1(7){ }u-1(16){ }u-1(20){ }}
+(code_label 25 24 29 4 3 "" [1 uses])
+(note 29 25 26 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 26 29 0 4 (use (reg/i:SI 0 ax)) test.c:12 -1
+     (nil))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+

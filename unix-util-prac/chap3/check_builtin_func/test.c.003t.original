@@ -1,0 +1,16 @@
+
+;; Function main (null)
+;; enabled by -tree-original
+
+
+{
+  char buffer[10];
+
+    char buffer[10];
+  printf ((const char * restrict) "test\n");
+  printf ((const char * restrict) "c");
+  sprintf ((char *) &buffer, (const char * restrict) "%s", (char *) "test");
+  return 0;
+}
+return 0;
+

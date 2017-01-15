@@ -1,0 +1,25 @@
+main ()
+{
+  int D.2287;
+
+  {
+    char buffer[10];
+
+    try
+      {
+        __builtin_puts (&"test"[0]);
+        __builtin_putchar (99);
+        __builtin_memcpy (&buffer, "test", 5);
+        D.2287 = 0;
+        return D.2287;
+      }
+    finally
+      {
+        buffer = {CLOBBER};
+      }
+  }
+  D.2287 = 0;
+  return D.2287;
+}
+
+
