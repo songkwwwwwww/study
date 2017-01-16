@@ -1,6 +1,4 @@
-#include <stdio.h>
-
-typedef unsigned char *byte_pointer;
+#include "show_bytes_test.h"
 
 void show_bytes(byte_pointer start, size_t len){
     int i;
@@ -36,7 +34,27 @@ void test_show_bytes(int val){
     show_pointer(pval);
 }
 
-int main(){
-    int n = 10;
-    test_show_bytes(n);
+void exec_ex_2_5(){
+    int a = 0x12345678;
+    byte_pointer ap = (byte_pointer) &a;
+    show_bytes(ap, 1);
+    show_bytes(ap, 2);
+    show_bytes(ap, 3);
 }
+
+void exec_ex_2_6(){
+    int a = 2607352; // = 0x0027C8F8
+    float b = 3510593.0;
+    double c = 3510593.0;
+
+    show_bytes( (byte_pointer) &a, sizeof(int));
+    show_bytes( (byte_pointer) &b, sizeof(float));
+}
+/*
+int main(){
+//    int n = 10;
+//    test_show_bytes(n);
+    //exec_ex_2_5();
+    exec_ex_2_6();
+}
+*/

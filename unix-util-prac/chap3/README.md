@@ -69,4 +69,11 @@ xxd like.o
 *static library*
 
 
+*share library*
+
+binary의 PLT 섹션의 내용과 GOT 섹션의 내용은 
+objdump -D like 명령 혹은 objdump -j .plt -D like와 objdump -j .got -s like 명령으로 확인 가능하다.
+
+최종적으로 생성되는 like 바이너리 구조는 -WI,-M 옵션을 추가해 컴파일하면 확인할 수 있다.
+gcc -o like like.c -save-temps -Wl,-M >& like.lds
 
