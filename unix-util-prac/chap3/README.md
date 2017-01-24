@@ -48,8 +48,13 @@ Program Header Table은 커널 로더에 필요한 정보들을 제공하는 테
 
 gcc는 내부적으로 printf()를 puts()로 변경한다. 이 외에도 여러 가지가 있으며,  이를 빌트인 확장이라고 한다.
 gcc의 여러 향상된 확장 기능을 제공하기 위해 사용되며 __builtinin_[함수명]() 형식의 이름을 가진다.
+빌트인 확장이 일어나는 시점과 해당하는 함수의 종류는 gcc 버전에 따라 다르다.
+gcc-4.1.x는 GIMPLE 트리를 만드는 시점에 발생하고 gcc-4.0.x는 RTL을 만드는 시점에 발생.
+컴파일  시 -fdump-tree-all -da 옵션을 추가하면 위 과정을 확인할 수 있다.
+(gimple 혹은 expand 파일)
 컴파일 시 -fno-builtin 옵션을 추가하면 이러한 확장이 일어나지 않는다.
 
+심볼 테이블은 nm 명령을 통해 읽을 수 있다.
 
 binary format의 전체 내용 보기
 xxd like.o
@@ -66,6 +71,7 @@ xxd like.o
 
 
 
+
 *static library*
 
 
@@ -76,4 +82,8 @@ objdump -D like 명령 혹은 objdump -j .plt -D like와 objdump -j .got -s like
 
 최종적으로 생성되는 like 바이너리 구조는 -WI,-M 옵션을 추가해 컴파일하면 확인할 수 있다.
 gcc -o like like.c -save-temps -Wl,-M >& like.lds
+
+
+자신의 시스템에서 사용하는 표준 C 공유 라이브러리와 동적 링커는 컴파일된 like 바이너리에서 ldd like 명령을 사용해 확인할 수 있다.
+
 
