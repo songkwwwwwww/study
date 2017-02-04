@@ -57,73 +57,70 @@ const int INF = 987654321;
 const int MAX_N = 15;
 const int MAX_K = 100;
 int N, K;
-int a[MAX_N + 1];
-int len[MAX_N + 1];
-int d[1 << MAX_N][MAX_K + 1];
-int ten[50 + 1];
-// 
-int solve(int state, int r){
-    // base case
-    if( state == ((1 << N) - 1) ){
-        if(r == 0) return 1;
-        else return 0;
-    }
 
-    int& ret = d[state][r];
-    if(ret != -1) return ret;
+int d[1 << MAX_N][MAX_K];
 
-    ret = 0;
-    for(int i = 0; i < N; i++){
-        if( !(state & (1 << i)) ){
-            //int n_r = (r * ten[len[i]] + a[i]) % K;
-            int n_r = r * ten[len[i]];
-            n_r %= K;
-            n_r += a[i];
-            n_r %= K;
-            
-            ret += solve( state | (1 << i), n_r);
-        }
-    }
-    return ret;
-}
+
+/*
+inline bool is_range(int x, int y){
+    return (0 <= x && x < N && 0 <= y && y < N);
+}*/
 
 ll gcd(ll a, ll b){
     while(b){
-        ll r = a % b;
-        a = b;
-        b = r;
+	ll r = a % b;
+	a = b;
+	b = r;
     }
     return a;
 }
 
 int main(){
     freopen("1086.txt", "r", stdin);
-    //setbuf(stdout, NULL);    
-    scanf("%d", &N);
+    //setbuf(stdout, NULL);
+    cin >> N;
     vector<string> num(N);
+    vi num_mod(N);
+    vi len(N);
     for(int i = 0; i < N; i++){
-        cin >> num[i];
-        len[i] = num[i].size();
+	cin >> num[i];
+	len[i] = num[i].size();
     }
-    scanf("%d", &K);
+    cin >> K;
+
     for(int i = 0; i < N; i++){
-        a[i] = 0;
-        for(int j = 0; j < num[i].size(); j++){
-            a[i] = a[i] * 10 + (num[i][j] - '0');
-            a[i] %= K;
-        }
+	for(int j = 0; j < len[i]; j++){
+	    num_mod[i] = num_mod[i] * 10 + (num[i][j] - '0');
+	    num_mod[i] %= K;
+	}
     }
+    vi ten(51);
     ten[0] = 1;
     for(int i = 1; i <= 50; i++){
-        ten[i] = ten[i - 1] * 10;
-        ten[i] %= K;
+	ten[i] = ten[i - 1] * 10;
+	ten[i] %= K;
     }
-    memset(d, -1, sizeof(d));
-    ll a = solve(0, 0);
+
+    d[0][0] = 1;
+    for(int i = 0; i < (1 << N); i++){
+	for(int j = 0; j < K; j++){
+	    for(int k = 0; k < N; k++){
+		if((i & (1 << k)) == 0){
+		    int next = j * ten[len[k]];
+		    next %= K;
+		    next += num_mod[k];
+		    next %= K;
+		    d[i | (1 << k)][next] += d[i][j];
+		}
+	    }
+	}
+    }
+    ll a = d[(1 << N) - 1][0];
     ll b = 1;
+    // 모든 경우의 수, 즉 N! 을 계산
     for(int i = 2; i <= N; i++){
-        b = b * i;
-    } 
+	b *= (ll)i;
+    }
     ll g = gcd(a, b);
-    printf("%lld/%lld\n", a / g, b / g);
+    cout << a / g << "/" << b / g << endl;
 }
