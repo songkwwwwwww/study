@@ -9,7 +9,7 @@
 #include <set>
 
 #include <map>
-//#include <unordered_map>
+//#include <unordered_map> // c++11
 
 #include <utility> // std::pair
 
@@ -27,159 +27,134 @@ using namespace std;
 
 typedef long long ll;
 
+typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+
+typedef vector<double> vd;
+typedef vector<vd> vvd;
+
+typedef vector<long long> vl;
+typedef vector<vl> vvl;
+
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
+
+typedef queue<int> qi;
+
 const int dx[4] = {0, 0, 1, -1}; // E W S N;
 const int dy[4] = {1, -1, 0, 0}; // E W S N;
-
-typedef vector<int> VI;
-typedef vector<VI> VVI;
-
-typedef queue<int> QI;
 
 const int INF = 987654321;
 
 /*
 
 */
-const int MAX_V = 52;
-VI adj[MAX_V];
 
 
-int c_to_i(char ch){
-    if('A' <= ch && ch <= 'Z')
-        return ch - 'A';
-    else if('a' <= ch && ch <= 'z')
-        return ch - 'a' + 26;
-    else 
-        return -1;
-}
+const int MAX_N = 8;
+const int MAX_M = 8;
 
-int main(){
-    freopen("6086.txt", "r", stdin);
-    int N; scanf("%d", &N);
 
-    VVI c(MAX_V, VI(MAX_V));
-    VVI f(MAX_V, VI(MAX_V));
+struct MAX_FLOW{
+    // 총 노드의 개수
+    int n;
 
-    for(int i = 0; i < N; i++){
-        char u, v; int w, nu, nv;
-        scanf(" %c %c %d", &u, &v, &w);
-        nu = c_to_i(u);
-        nv = c_to_i(v);
-        c[nu][nv] += w;
-        adj[nu].push_back(nv);
-        adj[nv].push_back(nu);
+    vvi c, f;
+    vi dad; // 증가 경로에서 이전 노드를 기억해두기 위한 변수
+    vi q; // 배열로 사용하는 queue
+
+    MAX_FLOW(int nn): n(nn), c(nn, vi(nn)), f(nn, vi(nn)), dad(nn), q(nn) {
     }
 
-    int total = 0, S = c_to_i('A'), T = c_to_i('Z');
-
-    while(true){
-        VI prev(MAX_V, -1);
-        QI q;
-        q.push(S);
-
-        while(!q.empty()){
-            int here = q.front(); q.pop();
-            for(int i = 0; i < adj[here].size(); i++){
-                int there = adj[here][i];
-                if(c[here][there] - f[here][there] > 0 && prev[there] == -1){
-                    q.push(there);
-                    prev[there] = here;
-                    if(there == T) break;
-                }
-            }
-        }
-        if(prev[T] == -1) break;
-
-        int flow = INF;
-        for(int i = T; i != S; i = prev[i])
-            flow = min(flow, c[prev[i]][i] - f[prev[i]][i]);
-        for(int i = T; i != S; i = prev[i]){
-            f[prev[i]][i] += flow;
-            f[i][prev[i]] -= flow;
-        }
-        total += flow;
-    }
-    printf("%d\n", total);    
-}
-/*
-
-struct MaxFlow {
-  int N;
-  VVI cap, flow;
-  VI dad, Q;
-
-  MaxFlow(int N) :
-    N(N), cap(N, VI(N)), flow(N, VI(N)), dad(N), Q(N) {}
-
-  void AddEdge(int from, int to, int cap) {
-    this->cap[from][to] += cap;
-  }
-
-  int BlockingFlow(int s, int t) {
-    fill(dad.begin(), dad.end(), -1);
-    dad[s] = -2;
-
-    int head = 0, tail = 0;
-    Q[tail++] = s;
-    while (head < tail) {
-      int x = Q[head++];
-      for (int i = 0; i < N; i++) {
-        if (dad[i] == -1 && cap[x][i] - flow[x][i] > 0) {
-          dad[i] = x;
-          Q[tail++] = i;
-        }
-      }
+    void add_edge(int from, int to, int cap){
+	this->c[from][to] += cap;
     }
 
-    if (dad[t] == -1) return 0;
+    int get_flow(int s, int t){
+	fill(dad.begin(), dad.end(), -1); // dad 변수 초기화
+	dad[s] = -2;
 
-    int totflow = 0;
-    for (int i = 0; i < N; i++) {
-      if (dad[i] == -1) continue;
-      int amt = cap[i][t] - flow[i][t];
-      for (int j = i; amt && j != s; j = dad[j])
-        amt = min(amt, cap[dad[j]][j] - flow[dad[j]][j]);
-      if (amt == 0) continue;
-      flow[i][t] += amt;
-      flow[t][i] -= amt;
-      for (int j = i; j != s; j = dad[j]) {
-        flow[dad[j]][j] += amt;
-        flow[j][dad[j]] -= amt;
-      }
-      totflow += amt;
+	int head = 0, tail = 0;
+	q[tail++] = s; // q.push(s)
+	
+	while(head < tail){
+	    int here = q[head++]; // q.pop();
+	    for(int there = 0; there < n; there++){
+		if(dad[there] == -1 && c[here][there] - f[here][there] > 0){
+		    dad[there] = here;
+		    q[tail++] = there;
+		}
+	    }
+	}
+
+	if(dad[t] == -1) return 0;
+
+	int total_flow = 0;
+	for(int i = 0; i < n; i++){
+	    if(dad[i] == -1) continue;
+
+	    int amount = c[i][t] - f[i][t];
+	    for(int j = i; amount && (j != s); j = dad[j]){
+		amount = min(amount, c[dad[j]][j] - f[dad[j]][j]);
+	    }
+	    if(amount == 0) continue;
+	    f[i][t] += amount;
+	    f[t][i] -= amount;
+
+	    for(int j = i; j != s; j = dad[j]){
+		f[dad[j]][j] += amount;
+		f[j][dad[j]] -= amount;
+	    }
+	    total_flow += amount;
+	}
+	return total_flow;
     }
 
-    return totflow;
-  }
+    int get_max_flow(int s, int t){
+	int total_flow = 0;
+	while(int flow = get_flow(s, t)){
+	    total_flow += flow;
+	}
+	return total_flow;
+    }
 
-  int GetMaxFlow(int source, int sink) {
-    int totflow = 0;
-    while (int flow = BlockingFlow(source, sink))
-      totflow += flow;
-    return totflow;
-  }
 };
 
-int c_to_i(char ch){
-    if('A' <= ch && ch <= 'Z')
-        return ch - 'A';
-    else if('a' <= ch && ch <= 'z')
-        return ch - 'a' + 26;
-    else 
-        return -1;
+int get_num(char c){
+    if('A' <= c && c <= 'Z'){
+	return c - 'A';
+    }
+    else if('a' <= c && c <= 'z'){
+	return c - 'a' + 26;
+    }
+    else{
+	return -1; // error
+    }
 }
 
 int main(){
     freopen("6086.txt", "r", stdin);
-    int N; scanf("%d", &N);
-    MaxFlow mf(52);
+    //setbuf(stdout, NULL);
+    int N;
+    scanf("%d", &N);
+    //printf("N : %d\n", N);
+    MAX_FLOW m(52);
+
     for(int i = 0; i < N; i++){
-        char u, v; int w, nu, nv;
-        scanf(" %c %c %d", &u, &v, &w);
-        nu = c_to_i(u);
-        nv = c_to_i(v);
-        mf.AddEdge(nu, nv, w);
+	char cu, cv;
+	int u, v, cap;
+	
+	scanf(" %c %c %d", &cu, &cv, &cap);
+	//printf("%d : %c %c %d\n", i, cu, cv, cap);
+
+	u = get_num(cu);
+	v = get_num(cv);
+	//printf("u = %d, v = %d, cap = %d\n", u, v, cap);
+	m.add_edge(u, v, cap);
     }
-    printf("%d\n", mf.GetMaxFlow(0, 25));
+    int ans = m.get_max_flow(0, 25);
+    printf("%d\n", ans);
 }
-*/
