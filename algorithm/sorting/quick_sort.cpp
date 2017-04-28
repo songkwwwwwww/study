@@ -1,3 +1,30 @@
+void quick_sort(int left, int right, int input[]){
+    int i = left, j = right;
+    int pivot = inpuit[(left + right) / 2];
+    while(i <= j){
+	while(input[i] < pivot) i++;
+	while(pivot < input[j]) j--;
+	if(i <= j){
+	    swap(input[i], input[j]);
+	    i++;
+	    j--;
+	}
+    }
+    if(left < j) quick_sort(left, j, input);
+    if(i < right) quick_sort(i, right, input);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #include <iostream>
 
 void swap(int& a, int& b){
