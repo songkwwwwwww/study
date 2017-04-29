@@ -1,3 +1,42 @@
+quick_sort(l, r)
+    if L < r
+	p <- partition(l, r)
+	quick_sort(l, p -  1)
+	quick_sort(p + 1, r)
+
+
+Hoare-Partition Algorithm
+partition(l, r)
+    p <- A[l]
+    i <- l
+    j <- r
+    while i <= j
+	while A[i] <= p : i++
+	while A[j] >= p : j--
+	if i < j swap(A[i], A[j])
+    
+    swap(a[l], a[j])
+    return j
+
+
+Lomuto-Partition Algorithm
+partition(l, r)
+    x <- A[r]
+    i <- l - 1
+
+    for j in l -> r - 1
+	if a[j] <= x
+	    i++, swap(A[i], A[j])
+
+    swap(A[i + 1], A[r])
+    return i + 1
+
+
+
+
+
+
+
 void quick_sort(int left, int right, int input[]){
     int i = left, j = right;
     int pivot = inpuit[(left + right) / 2];
