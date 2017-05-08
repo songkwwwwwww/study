@@ -1,0 +1,38 @@
+
+/*
+	sizeIncrement : 초기 버퍼의 크기, 증가가 필요할 때 증가량
+	buffer : 읽은 문자들의 시작 위치
+	currentPosition : 버퍼에서 다음 문자를 저장할 위치
+	maximumLength : 버퍼에 안전하게 저장할 수 있는 문자의 최대 길이
+	length : 읽은 문자 수
+	character : 마지막에 읽은 문자
+*/
+char* getLine(void) {
+	const size_t sizeIncrement = 10;
+	char* buffer = malloc(sizeIncrement);
+	char* currentPosition = buffer;
+	size_t maximumLength = sizeIncrement;
+	size_t length = 0;
+	int character;
+
+	if (currentPosition == NULL) { return NULL; }
+
+	while (1) {
+		character = fgetc(stdin);
+		if (character == '\n') { break; }
+
+		if (++length >= maximumLength) {
+			char* newBuffer = realloc(buffer, maximumLength += sizeIncrement);
+
+			if (newBuffer == NULL) {
+				free(buffer);
+				return NULL;
+			}
+			currentPosition = newBuffer + (currentPosition - buffer);
+			buffer = newBuffer;
+		}
+		*currentPosition++ = character;
+	}
+	*currentPosition = '\0';
+	return buffer;
+}
