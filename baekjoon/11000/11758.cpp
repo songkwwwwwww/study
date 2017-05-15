@@ -1,53 +1,36 @@
-#include <iostream>
-#include <vector>
-#include <algorithm> // std::max, std::min, std::sort, std::swap
-#include <string> // std::string, std::stoi
-#include <stack>
-#include <queue> // std::queue
-#include <deque> // std::deque
-#include <list> // std::list
-#include <set>
-
-#include <map>
-//#include <unordered_map> // c++11
-
-#include <utility> // std::pair
-
-#include <functional> // greater, less
-#include <limits> // std::numeric_limits<double>::max()
-
 #include <cstdio>
-#include <cstring> // memset
-#include <cmath> // std::abs
 
 using namespace std;
 
-#define MAX(x, y) ((x) > (y) ? (x) : (y))
-#define MIN(x, y) ((x) < (y) ? (x) : (y))
+// P1, P2, P3를 순서대로 이은 선분이 반시계 방향을 나타내면 1, 시계 방향이면 -1, 일직선이면 0을 출력한다.
 
-typedef long long ll;
+// counterclockwise (left turn): σ < τ	    1
+// clockwise (right turn): σ > τ	    -1
+// collinear (left turn): σ = τ		    0
+// (y2−y1) (x3−x2) − (y3−y2) (x2−x1)
 
-typedef vector<int> vi;
-typedef vector<vi> vvi;
+const int MAX_N = 3;
 
-typedef vector<bool> vb;
-typedef vector<vb> vvb;
+struct point{
+    int x, y;
+};
 
-typedef queue<int> qi;
+point a[MAX_N];
 
-const int dx[4] = {0, 0, 1, -1}; // E W S N;
-const int dy[4] = {1, -1, 0, 0}; // E W S N;
 
-const int INF = 987654321;
-
-/*
-
-*/
-
-const int MAX_N = 8;
-const int MAX_M = 8;
 
 int main(){
-    freopen(".txt", "r", stdin);
-
+    freopen("11758.txt", "r", stdin);
+    for(int i = 0; i < 3; i++){
+	scanf("%d %d", &a[i].x, &a[i].y);
+    }
+    int temp = (a[1].y - a[0].y) * (a[2].x - a[1].x) - (a[2].y - a[1].y) * (a[1].x - a[0].x);
+    int ans;
+    if(temp < 0)
+	ans = 1;
+    else if(temp > 0)
+	ans = - 1;
+    else
+	ans = 0;
+    printf("%d\n", ans);
 }
