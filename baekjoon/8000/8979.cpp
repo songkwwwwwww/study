@@ -1,86 +1,68 @@
-#include <iostream>
-#include <vector>
-#include <algorithm> // std::max, std::min, std::sort, std::swap
-#include <string> // std::string, std::stoi
-#include <stack>
-#include <queue> // std::queue
-#include <deque> // std::deque
-#include <list> // std::list
-#include <set>
-
-#include <map>
-//#include <unordered_map> // c++11
-
-#include <utility> // std::pair
-
-#include <functional> // greater, less
-#include <limits> // std::numeric_limits<double>::max()
-
-#include <cstdio>
-#include <cstring> // memset
-#include <cmath> // std::abs
-
-using namespace std;
-
-#define MAX(x, y) ((x) > (y) ? (x) : (y))
-#define MIN(x, y) ((x) < (y) ? (x) : (y))
-
-typedef long long ll;
-
-typedef pair<int, int> pii;
-typedef pair<double, double> pdd;
-
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-
-typedef vector<double> vd;
-typedef vector<vd> vvd;
-
-typedef vector<long long> vl;
-typedef vector<vl> vvl;
-
-typedef vector<bool> vb;
-typedef vector<vb> vvb;
-
-typedef queue<int> qi;
-
-const int dx[4] = {0, 0, 1, -1}; // E W S N;
-const int dy[4] = {1, -1, 0, 0}; // E W S N;
-
-const int INF = 987654321;
-
-/*
-
-*/
-
+#include <stdio.h>
 
 const int MAX_N = 1000;
+int N, K;
 
-struct d{
-    int g, s, b;
+struct node{
+    int index, g, s, b;
 };
 
+node a[MAX_N + 3];
+
+template <typename T>
+void swap(T& a, T& b){
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+bool comp(node& a, node& b){
+    if(a.g != b.g){
+	return a.g > b.g;
+    }
+    else if(a.s != b.s){
+	return a.s > b.s;
+    }
+    else if(a.b != b.b){
+	return a.b > b.b;
+    }
+    else{
+	return a.index == K;
+    }
+}
+
+int partition(int l, int r){
+    int i = l - 1;
+    for(int j = l; j <= r - 1; j++){
+	if(comp(a[j], a[r])){
+	    i++;
+	    swap(a[i], a[j]);
+	}
+    }
+    swap(a[i + 1], a[r]);
+    return i + 1;
+}
+
+void quick_sort(int l, int r){
+    if(l < r){
+	int p = partition(l, r);
+	quick_sort(l, p - 1);
+	quick_sort(p + 1, r);
+    }
+}
 
 int main(){
-    freopen("8979.txt", "r", stdin);
-    //setbuf(stdout, NULL);
-    int N, K;
+    freopen("8979.txt", "r" , stdin);
+
     scanf("%d %d", &N, &K);
-    vector<d> v; v.reserve(N);
-    for(int index, g, s, b, i = 0; i < N; i++){
-        scanf("%d %d %d %d", &index, &g, &s, &b);
-        v.push_back((d){g, s, b});
-    }
-    K--;
-    int ans = 1;
     for(int i = 0; i < N; i++){
-        if(i == K) continue;
-        
-        if(v[i].g > v[K].g || ( v[i].g == v[K].g && v[i].s > v[K].s ) 
-            || (v[i].g == v[K].g && v[i].s == v[K].s && v[i].b > v[K].b)){
-            
-            ans++;
-        }
+	scanf("%d %d %d %d", &a[i].index, &a[i].g, &a[i].s, &a[i].b);
     }
-    printf("%d\n", ans);
+    quick_sort(0, N - 1);
+    for(int i = 0; i < N; i++){
+	if(a[i].index == K){
+	    printf("%d\n", i + 1);
+	    break;
+	}
+    }
 }
