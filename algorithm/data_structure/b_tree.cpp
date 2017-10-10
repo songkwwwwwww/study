@@ -53,4 +53,26 @@ B-TREE-INSERT(T, k)
 9	B-TREE-INSERT-NONFULL(s, k)
 10  else B-TREE-INSERT-NONFULL(r, k)
 
+B-TREE-INSERT-NONFULL(x, k)
+1   i = x.n
+2   if x.leaf
+3	while i >= 1 and k < x.key_i
+4	    x.key_i + 1 = x.key_i
+5	    i = i - 1
+6	x.key_i + 1 = k
+7	x.n = x.n + 1
+8	DISK-WRITE(x)
+9   else while i >= 1 and k < x.key_i
+10	    i = i - 1
+11	i = i + 1
+12	DISK-READ(x.c_i)
+13	if x.c_i.n == 2t - 1
+14	    B-TREE-SPLIT-CHILD(x, i)
+15	    if k > x.key_i
+16		i = i + 1
+17	B-TREE-INSERT-NONFULL(x.c_i, k)
+
+
+
+
 
