@@ -1,6 +1,7 @@
 CC = g++
 TARGET = test
-OPT = -std=c++11
+OPT = -std=c++11\
+      -DSONG_TEST
 
 $(TARGET) : test.o
 	$(CC) $(OPT) -o  $(TARGET) test.o
