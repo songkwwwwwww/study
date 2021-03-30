@@ -1,4 +1,5 @@
-set nocompatible              " be iMproved, required                                                                                                                                                          2 filetype off                  " required
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -25,13 +26,13 @@ filetype plugin indent on    " required
 syntax on
 "filetype plugin indent on
 set tag=./tags;/
-" easy-tag " tags를 비동기로 불러와준다. (필수) tag사이즈가 커지게 되면 vim이 블록되는 시간이 길어져서 답답하다
+" easy-tag " tags를 비동기로 불러와준다. (필수) tag사이즈가 커지게 되면 vim이 블록되는 시간이 길어져서 답답하다 
 let g:easytags_async=1
-" highlight를 켜면 좋지만 이것도 속도가 느려진다.
+" highlight를 켜면 좋지만 이것도 속도가 느려진다. 
 let g:easytags_auto_highlight = 0
-" struct의 멤버변수들도 추적이 된다.
+" struct의 멤버변수들도 추적이 된다. 
 let g:easytags_include_members = 1
-" 현재 프로젝트에서 쓰는 tags파일을 우선 로드하고 없을 경우 global tags를 로드한다.
+" 현재 프로젝트에서 쓰는 tags파일을 우선 로드하고 없을 경우 global tags를 로드한다. 
 let g:easytags_dynamic_files = 1
 
 set ai
@@ -41,7 +42,7 @@ set smartindent
 set nu
 set hlsearch
 set cursorline
-
+ 
 function! LoadCscope()
   let db = findfile("cscope.out", ".;")
   if (!empty(db))
@@ -58,3 +59,5 @@ nmap <F8> :TagbarToggle<CR>
 "set tags=/home/song/Dev/AOSP/Q/tags,/home/song/Dev/sqlite/sqlite
 "set tags=/home/song/Dev/sqlite/SQLite-3_22_0-0c55d179/tags
 "set tags=/home/song/Dev/sqlite/sqlite/tags
+
+
