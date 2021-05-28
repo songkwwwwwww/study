@@ -48,6 +48,7 @@ public:
 		break;
 
 	    swap(data[cur], data[child])
+	    cur = child;
 	}
 	return ret;
     }
